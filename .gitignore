@@ -1,3 +1,10 @@
 
 # Playwright
 codegen/
+allure-report/
+allure-results/
+*.html
+assets/
+data/
+widgets/
+history/
