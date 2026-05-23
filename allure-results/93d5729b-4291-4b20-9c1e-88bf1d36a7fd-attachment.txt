@@ -1,0 +1,15 @@
+{
+  body: [
+    { accountId: 17989091, id: '93', name: 'Flo', phone: null },
+    { accountId: 17989091, id: '80', name: 'Theodora', phone: null },
+    { accountId: 17989091, id: '68', name: 'Teagan', phone: null },
+    {
+      accountId: 17989091,
+      id: '95',
+      name: 'Lance',
+      phone: '79111111111'
+    },
+    { accountId: 17989091, id: '13', name: 'Rae', phone: null }
+  ]
+}
+ID для удаления: [ '93', '80', '68', '95', '13' ]

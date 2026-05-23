@@ -1,2 +1,0 @@
-# qaGuruLearn
-#1
