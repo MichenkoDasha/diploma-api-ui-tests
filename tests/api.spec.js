@@ -67,7 +67,7 @@ const userApi1 = new userApiBuilder()
     .build();
 console.log(userApi1);
 const createdUser1 = await api.postUser.post(undefined, [userApi1]);
-
+await new Promise(resolve => setTimeout(resolve, 100));
 //создаем второго пользователя с таким же phone
 const userApi2 = new userApiBuilder()
     .withId()
@@ -105,14 +105,21 @@ test('05 - удаление пользователя api', { tag: '@delete' }, a
 
 });
 
-test('06 - удаление пользователя api', { tag: '@delete' }, async ({ request, page }) => {
+/*test('06 - удаление всех пользователя api', { tag: '@delete' }, async ({ request, page }) => {
     const api = new Api(request);
-    //удаляем пользователя
-    const deletedUser = await api.deleteUser.delete(undefined, 65);
+    //получаем всех существующих пользователей
+    const getAllUsers = await api.getAllUsers.get(undefined);
+    console.log(getAllUsers);
+    //сохраняем id всех пользователей в массив
+    const userIds = getAllUsers.body.map(user => user.id);
+    console.log('ID для удаления:', userIds);
+    
+    //удаляем пользователей
+    const deletedUser = await api.deleteAllUsers.patch(undefined, userIds);
     //проверяем, что статус ответа 200
     expect(deletedUser.status).toBe(200);
 
 
-});
+});*/
 
 

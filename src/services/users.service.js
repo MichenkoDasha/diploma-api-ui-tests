@@ -90,3 +90,27 @@ export class DeleteUserService {
         })
     };
 }
+
+export class DeleteAllUserService {
+    constructor(request) {
+        this.request = request;
+    }
+    async patch(token = '239fea9412c74011a7891f3896002230', userIds) {
+
+        return test.step('PATCH /users/bulk_delete', async () => {
+            const response = await this.request.patch(`${urlApi}/users/bulk_delete`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                data: userIds
+            });
+            const text = await response.text(); 
+            return {
+                body: text, 
+                status: response.status()
+            };
+        })
+    };
+}
