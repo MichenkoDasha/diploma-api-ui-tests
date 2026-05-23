@@ -4,6 +4,9 @@ pipeline {
     environment {
         ALLURE_RESULTS = 'allure-results'
         ALLURE_REPORT = 'allure-report'
+        ALLURE_TOKEN = '8b477939-9c49-4b5b-b29d-12c1db13106a'
+        ALLURE_ENDPOINT = 'https://allure.autotests.cloud'
+        ALLURE_PROJECT_ID = '5218'
     }
 
     stages {
@@ -30,7 +33,24 @@ pipeline {
     //            }
      //       }
       //  }
-
+    stage('Upload to Allure TestOps') {
+            steps {
+                nodejs('NodeJS22.22.0') {
+                    sh '''
+                        # Скачать allurectl
+                        curl -L https://github.com/allure-framework/allurectl/releases/latest/download/allurectl_linux_amd64 -o allurectl
+                        chmod +x allurectl
+                        
+                        # Загрузить результаты в TestOps
+                        ./allurectl upload \
+                          --endpoint ${ALLURE_ENDPOINT} \
+                          --token ${ALLURE_TOKEN} \
+                          --project-id ${ALLURE_PROJECT_ID} \
+                          ${ALLURE_RESULTS} || echo "TestOps upload failed"
+                    '''
+                }
+            }
+        }
         stage('Publish Allure Report') {
             steps {
                 // Allure Plugin (для Allure 2, опционально)
