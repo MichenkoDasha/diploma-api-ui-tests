@@ -1,0 +1,8 @@
+{
+  body: {
+    status: 401,
+    requestId: '0f73894ed00cf0095af8d8c4e60827d5',
+    error: 'INVALID_APIKEY',
+    description: 'Invalid authorization header'
+  }
+}

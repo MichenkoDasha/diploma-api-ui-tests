@@ -1,0 +1,5 @@
+{ id: '31', name: 'Yesenia', phone: '79111111111' }
+{
+  body: '{"status":400,"requestId":"9ec6b7c6de48d6293ccb7fa1f4249f01","error":"DUPLICATE_PHONE_NUMBER","description":"User with phone number 79111111111 already exists in the CRM.","data":{"phone":"79111111111"}}',
+  status: 400
+}

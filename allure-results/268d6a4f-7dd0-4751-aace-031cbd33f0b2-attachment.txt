@@ -1,0 +1,10 @@
+{ id: '97', name: 'Junius' }
+{
+  body: {
+    status: 404,
+    requestId: '422399e815c3d4f671e3f0dbc83659d2',
+    error: 'USER_NOT_FOUND',
+    description: 'Requested user not found',
+    data: 'undefined'
+  }
+}
