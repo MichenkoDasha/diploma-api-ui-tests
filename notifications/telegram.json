@@ -1,0 +1,20 @@
+{
+  "base": {
+    "logo": "",
+    "project": "Wazzup",
+    "environment": "some env",
+    "comment": "come comment",
+    "reportLink": "",
+    "language": "en",
+    "allureFolder": "allure-report",
+    "enableChart": true,
+    "enableSuitesPublishing": false,
+    "customData": {}
+  },
+  "telegram": {
+    "token": "8922093610:AAFMVF1-89b8NqQWiDoLzkkhi4ergN7Kdcg",
+    "chat": "-5174723274",
+    "topic": "",
+    "replyTo": ""
+  }
+}
