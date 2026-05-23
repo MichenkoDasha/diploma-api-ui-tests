@@ -3,7 +3,7 @@ name: wazzup gof diploma
 on: 
   push:
     branches:
-      - master
+      - main
 # ручной запуск
   workflow_dispatch:
 
