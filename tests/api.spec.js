@@ -105,4 +105,14 @@ test('05 - удаление пользователя api', { tag: '@delete' }, a
 
 });
 
+test('06 - удаление пользователя api', { tag: '@delete' }, async ({ request, page }) => {
+    const api = new Api(request);
+    //удаляем пользователя
+    const deletedUser = await api.deleteUser.delete(undefined, 65);
+    //проверяем, что статус ответа 200
+    expect(deletedUser.status).toBe(200);
+
+
+});
+
 

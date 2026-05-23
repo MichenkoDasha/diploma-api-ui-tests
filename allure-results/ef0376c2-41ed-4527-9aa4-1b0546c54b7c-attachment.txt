@@ -1,9 +1,0 @@
-{ id: '99', name: 'Mya' }
-{
-  body: {
-    status: 401,
-    requestId: '099dedbd35cb83e690cbe9d2e3180f42',
-    error: 'INVALID_APIKEY',
-    description: 'Invalid authorization header'
-  }
-}

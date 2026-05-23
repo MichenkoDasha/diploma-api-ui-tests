@@ -1,9 +1,0 @@
-{
-  body: {
-    status: 404,
-    requestId: '782ece7ea9b63209d26456975b667696',
-    error: 'USER_NOT_FOUND',
-    description: 'Requested user not found',
-    data: 'undefined'
-  }
-}

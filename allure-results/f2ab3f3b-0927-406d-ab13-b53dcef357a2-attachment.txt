@@ -1,4 +1,0 @@
-{ id: '30', name: 'Judson' }
-{
-  body: { accountId: 40418172, id: '30', name: 'Judson', phone: null }
-}
