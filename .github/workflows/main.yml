@@ -18,7 +18,7 @@ jobs:
       - name: Устанавливаем пакеты из package.json
         run: npm ci
       - name: Устанавливаем браузеры
-        run: npx playwright install --with-deps
+        run: npx playwright install chromium --with-deps
       - name: Устанавливаем allure 3
         run: npm add allure
       - name: Run Playwright tests
