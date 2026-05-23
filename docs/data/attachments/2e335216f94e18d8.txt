@@ -1,0 +1,44 @@
+{
+  body: [
+    { accountId: 17989091, id: '35', name: 'Wade', phone: null },
+    { accountId: 17989091, id: '71', name: 'Mireille', phone: null },
+    { accountId: 17989091, id: '46', name: 'Jovan', phone: null },
+    {
+      accountId: 17989091,
+      id: '48',
+      name: 'Cyril',
+      phone: '79111111111'
+    },
+    { accountId: 17989091, id: '11', name: 'Sydni', phone: null },
+    { accountId: 17989091, id: '75', name: 'Santino', phone: null },
+    { accountId: 17989091, id: '88', name: 'Andre', phone: null },
+    { accountId: 17989091, id: '27', name: 'Zula', phone: null },
+    { accountId: 17989091, id: '28', name: 'Dixie', phone: null },
+    { accountId: 17989091, id: '41', name: 'Franz', phone: null },
+    { accountId: 17989091, id: '80', name: 'Denis', phone: null },
+    { accountId: 17989091, id: '66', name: 'Sofia', phone: null },
+    {
+      accountId: 17989091,
+      id: '31',
+      name: 'Lola',
+      phone: '79111111111'
+    },
+    { accountId: 17989091, id: '26', name: 'Duane', phone: null },
+    { accountId: 17989091, id: '21', name: 'Karelle', phone: null },
+    { accountId: 17989091, id: '82', name: 'Kendra', phone: null },
+    { accountId: 17989091, id: '74', name: 'Arlie', phone: null },
+    {
+      accountId: 17989091,
+      id: '13',
+      name: 'Margot',
+      phone: '79111111111'
+    }
+  ]
+}
+ID для удаления: [
+  '35', '71', '46', '48',
+  '11', '75', '88', '27',
+  '28', '41', '80', '66',
+  '31', '26', '21', '82',
+  '74', '13'
+]
