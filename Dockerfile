@@ -4,4 +4,4 @@ FROM mcr.microsoft.com/playwright:v1.58.2-noble
 COPY . .
 RUN npm ci
 # Команда по умолчанию
-CMD ["npm", "test", "run"]
+CMD ["npm", "test"]
