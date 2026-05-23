@@ -4,7 +4,7 @@
     "project": "Wazzup",
     "environment": "some env",
     "comment": "come comment",
-    "reportLink": "https://MichenkoDasha/diploma-api-ui-tests/tree/main/allure-results",
+    "reportLink": "https://michenkodasha.github.io/diploma-api-ui-tests/",
     "language": "en",
     "allureFolder": "allure-report",
     "enableChart": true,
