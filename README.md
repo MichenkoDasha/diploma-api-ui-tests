@@ -126,16 +126,16 @@ Jenkinsfile в [репозитории](https://jenkins.autotests.cloud/job/006-
 Для отправки используется утилита `allure-notifications` (Java).  
 Уведомления в GitHub Actions не дублируются — вся статистика централизованно приходит только из Jenkins.
 
-**Пример сообщения:**
+#### Пример сообщения
+#
 ![alt text](image.png)
-
-> Results:  
-> Environment: some env  
-> Duration: 00:02:59.854  
-> Total scenarios: 10 
-> Total passed: 10 (100 %)
-> Total failed: 0 (0.0 %)  
-> Report: https://michenkodasha.github.io/diploma-api-ui-tests/
+Results:  
+Environment: some env  
+Duration: 00:02:59.854  
+Total scenarios: 10 
+Total passed: 10 (100 %)
+Total failed: 0 (0.0 %)  
+Report: https://michenkodasha.github.io/diploma-api-ui-tests/
 
 ## 🐳 Docker
 Проект полностью контейнеризирован. Dockerfile основан на официальном образе `mcr.microsoft.com/playwright`
