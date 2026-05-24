@@ -127,8 +127,9 @@ Jenkinsfile в [репозитории](https://jenkins.autotests.cloud/job/006-
 Уведомления в GitHub Actions не дублируются — вся статистика централизованно приходит только из Jenkins.
 
 #### Пример сообщения
-#
+
 ![alt text](image.png)
+
 Results:  
 Environment: some env  
 Duration: 00:02:59.854  
