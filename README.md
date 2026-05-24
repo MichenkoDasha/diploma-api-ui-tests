@@ -1,10 +1,5 @@
-# Wazzup — Diploma Project (QA.GURU)
-Дипломный проект по автоматизации тестирования Wazzup.
-[![GitHub Actions](https://github.com/MichenkoDasha/diploma-api-ui-tests/actions/workflows/docker-tests.yml/badge.svg)](https://github.com/MichenkoDasha/diploma-api-ui-tests/actions)
-[![Jenkins](https://img.shields.io/badge/Jenkins-CI-blue)](https://jenkins.autotests.cloud/job/006-js-diplomav1/)
+# Дипломный проект - автоматизация тестирования Wazzup (QA.GURU)
 [![Allure Report](https://img.shields.io/badge/Allure-Report-green)](https://michenkodasha.github.io/diploma-api-ui-tests/)
-
-## 🔗 Полезные ссылки
 
 | Ресурс | URL |
 |--------|-----|
@@ -13,19 +8,19 @@
 | 📊 Allure-отчёт (GitHub Pages) | [https://michenkodasha.github.io/diploma-api-ui-tests/](https://michenkodasha.github.io/diploma-api-ui-tests/) |
 | 🟣 Allure TestOps проект | [https://allure.autotests.cloud/project/5218](https://allure.autotests.cloud/project/5218) |
 | 📦 Репозиторий | [https://github.com/MichenkoDasha/diploma-api-ui-tests](https://github.com/MichenkoDasha/diploma-api-ui-tests) |
-| 🌐 Приложение wazzup | [https://app.dev-wazzup.tech/](https://app.dev-wazzup.tech/) |
+| 🌐 Приложение wazzup | [https://app.dev-wazzup24.com/](https://app.dev-wazzup24.com/) |
 
 ## 📋 Содержание
 
-- [Стек технологий](#стек-технологий)
-- [Что покрывается](#что-покрывается)
-- [Структура проекта](#структура-проекта)
-- [Локальный запуск](#локальный-запуск)
-- [CI/CD](#cicd)
-- [Allure](#allure)
-- [Allure TestOps](#allure-testops)
-- [Telegram-уведомления](#telegram-уведомления)
-- [Docker](#docker)
+- [Стек технологий](#-стек-технологий)
+- [Что покрывается](#-что-покрывается)
+- [Структура проекта](#-структура-проекта)
+- [Локальный запуск](#-локальный-запуск)
+- [CI/CD](#-cicd)
+- [Allure](#-allure)
+- [Allure TestOps](#-allure-testops)
+- [Telegram-уведомления](#-telegram-уведомления)
+- [Docker](#-docker)
 
 ## 🛠 Стек технологий
 
@@ -60,6 +55,7 @@
 - ✅ DELETE /users — удаление пользователя 
 
 ## 📁 Структура проекта
+```sh
 diploma-api-ui-tests/
 ├── .github/workflows/          # GitHub Actions CI
 ├── Jenkinsfile                 # Jenkins pipeline
@@ -75,49 +71,49 @@ diploma-api-ui-tests/
 │   ├── api.spec.js             # API-тесты
 │   └── ui.spec.js              # UI-тесты
 └── notifications/              # Telegram настройки
+```
 
 ## 💻 Локальный запуск
-npm test  
+```sh
+npm test
+```
 
-## Генерация Allure-отчёта локально
+## 📊 Генерация Allure-отчёта локально
+```sh
 npm run allureGenerate    # сгенерировать отчёт
 npm run allureOpen        # открыть в браузере
+```
 
-🔄 CI/CD
-GitHub Actions
-Пайплайн .github/workflows/docker-tests.yml:
-Сборка Docker-образа
-Запуск тестов в контейнере
-Генерация Allure-отчёта
-Загрузка результатов в Allure TestOps
-
-Jenkins
-Jenkinsfile в репозитории (job 006-js-diplomav1):
-Установка зависимостей
-Запуск тестов
-Генерация Allure-отчёта
-Загрузка в TestOps
-Уведомление в Telegram
-
-📊 Allure
 Используется allure-playwright.
+
 Результаты каждого прогона публикуются на GitHub Pages с сохранением истории.
 
 Что прикрепляется в отчёт:
-Скриншоты падений (Playwright, screenshot: 'only-on-failure')
-Трейсы (trace: 'retain-on-failure')
-Тело HTTP-ответов API (через response.text())
-environment.properties — переменные окружения
+- скриншоты падений (Playwright, screenshot: 'only-on-failure')
+- трейсы (trace: 'retain-on-failure')
+- тело HTTP-ответов API (через `response.text()`)
 
-🌐 Живой отчёт: https://michenkodasha.github.io/diploma-api-ui-tests/
+### 🔄 CI/CD
+#### GitHub Actions
+Пайплайн `.github/workflows/docker-tests.yml`:
+- сборка Docker-образа
+- запуск тестов в контейнере
+- генерация Allure-отчёта
 
-🟣 Allure TestOps
-Результаты загружаются в проект Wazzup (ID: 5218) через allurectl. После каждого билда автоматически создаётся новый Launch.
+#### Jenkins
+Jenkinsfile в [репозитории](https://jenkins.autotests.cloud/job/006-js-diplomav1/):
+- установка зависимостей
+- запуск тестов
+- генерация Allure-отчёта
+- загрузка результатов в Allure TestOps
+- уведомление в Telegram
 
-🔗 Проект: https://allure.autotests.cloud/project/5218
+#### 🌐 Живой отчёт: https://michenkodasha.github.io/diploma-api-ui-tests/
+
+#### 🟣 Allure TestOps
+Результаты загружаются в [проект Wazzup](https://allure.autotests.cloud/project/5218/test-cases?treeId=0) через `allurectl`. После каждого билда автоматически создаётся новый Launch.
 
 ## 📨 Telegram-уведомления
-
 После каждого прогона в **Jenkins** отправляется сообщение в Telegram со следующими данными:
 
 - Статус прогона
@@ -131,19 +127,20 @@ environment.properties — переменные окружения
 Уведомления в GitHub Actions не дублируются — вся статистика централизованно приходит только из Jenkins.
 
 **Пример сообщения:**
+![alt text](image.png)
 
 > Results:  
 > Environment: some env  
-> Duration: 02:15:59.854  
-> Total scenarios: 21  
-> Total passed: 19 (90.5 %)  
-> Total failed: 2 (9.5 %)  
+> Duration: 00:02:59.854  
+> Total scenarios: 10 
+> Total passed: 10 (100 %)
+> Total failed: 0 (0.0 %)  
 > Report: https://michenkodasha.github.io/diploma-api-ui-tests/
 
-🐳 Docker
-Проект полностью контейнеризирован. Dockerfile основан на официальном образе mcr.microsoft.com/playwright.
+## 🐳 Docker
+Проект полностью контейнеризирован. Dockerfile основан на официальном образе `mcr.microsoft.com/playwright`
 
-dockerfile
+```dockerfile
 FROM mcr.microsoft.com/playwright:v1.59.1-noble
 WORKDIR /app
 COPY package*.json ./
@@ -151,7 +148,10 @@ RUN npm ci
 COPY . .
 RUN npx playwright install chromium
 CMD ["npm", "test"]
-Сборка и запуск
-bash
+```
+
+## 🛠️ Сборка и запуск
+```bash
 docker build -t diploma-tests .
 docker run --rm diploma-tests
+```
