@@ -13,19 +13,22 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'secret_for_diploma', variable: 'ENV_FILE')]) {
                     nodejs('NodeJS22.22.0') {
-                        sh '''
-                            # Копируем секретный .env файл в рабочую директорию
-                            cp ${ENV_FILE} .env
-                            
-                            # Загружаем переменные в окружение
-                            set -a
-                            . ${ENV_FILE}
-                            set +a
-                            
-                            npm ci
-                            npx playwright install chromium --with-deps
-                            npm add allure
-                            npm t || echo "Tests completed with failures"
+                       sh '''
+                        cp ${ENV_FILE} .env
+                        
+                        # Загружаем переменные в окружение
+                        set -a
+                        . .env
+                        set +a
+                        
+                        # Проверяем, что переменные загрузились (для отладки)
+                        echo "API_BASE_URL = $API_BASE_URL"
+                        echo "API_TOKEN = ${API_TOKEN:0:10}..."
+                        
+                        npm ci
+                        npx playwright install chromium --with-deps
+                        npm add allure
+                        npm t || echo "Tests completed with failures"
                         '''
                     }
                 }
