@@ -56,19 +56,19 @@ pipeline {
         }
 
         stage('Telegram Notification') {
-            steps {
-                withCredentials([string(credentialsId: 'telegram-token_for_diploma', variable: 'TELEGRAM_TOKEN')]) {
-                    nodejs('NodeJS22.22.0') {
-                        sh '''
-    echo "TOKEN LENGTH: ${#TELEGRAM_TOKEN}"
-    java -DconfigFile=notifications/telegram.json \
-         -Dtelegram.token=${TELEGRAM_TOKEN} \
-         -jar notifications/allure-notifications-4.11.0.jar || echo "Telegram notification failed"
-'''
-                    }
-                }
+    steps {
+        withCredentials([string(credentialsId: 'telegram-token_for_diploma', variable: 'TELEGRAM_TOKEN')]) {
+            nodejs('NodeJS22.22.0') {
+                sh '''
+                    curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage" \
+                         -d "chat_id=-5174723274" \
+                         -d "text=✅ Тесты завершены.%0A%0A📊 Результаты: https://michenkodasha.github.io/diploma-api-ui-tests/" \
+                         -d "parse_mode=HTML" || echo "Telegram notification failed"
+                '''
             }
         }
+    }
+}
     }
 
     post {
