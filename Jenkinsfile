@@ -19,7 +19,7 @@ pipeline {
                             
                             # Загружаем переменные в окружение
                             set -a
-                            . .env
+                            . ${ENV_FILE}
                             set +a
                             
                             npm ci
@@ -67,10 +67,11 @@ pipeline {
                 withCredentials([string(credentialsId: 'telegram-token_for_diploma', variable: 'TELEGRAM_TOKEN')]) {
                     nodejs('NodeJS22.22.0') {
                         sh '''
-                            java -DconfigFile=notifications/telegram.json \
-                                 -Dtelegram.token=${TELEGRAM_TOKEN} \
-                                 -jar notifications/allure-notifications-4.11.0.jar || echo "Telegram notification failed"
-                        '''
+    echo "TOKEN LENGTH: ${#TELEGRAM_TOKEN}"
+    java -DconfigFile=notifications/telegram.json \
+         -Dtelegram.token=${TELEGRAM_TOKEN} \
+         -jar notifications/allure-notifications-4.11.0.jar || echo "Telegram notification failed"
+'''
                     }
                 }
             }
