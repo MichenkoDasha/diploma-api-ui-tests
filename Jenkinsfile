@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                withCredentials([file(credentialsId: 'your-env-file-id', variable: 'ENV_FILE')]) {
+                withCredentials([file(credentialsId: 'secret_for_diploma', variable: 'ENV_FILE')]) {
                     nodejs('NodeJS22.22.0') {
                         sh '''
                             # Копируем секретный .env файл в рабочую директорию
