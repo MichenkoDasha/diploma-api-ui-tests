@@ -6,6 +6,9 @@ pipeline {
         ALLURE_REPORT = 'allure-report'
         ALLURE_ENDPOINT = 'https://allure.autotests.cloud'
         ALLURE_PROJECT_ID = '5218'
+        API_BASE_URL = 'https://api.dev-wazzup24.com/v3'
+        BASE_URL = 'https://app.dev-wazzup24.com'
+    }
 
     stages {
         stage('Build') {
@@ -98,5 +101,4 @@ pipeline {
             echo '❌ Pipeline failed. Check console output.'
         }
     }
-}
 }
