@@ -10,7 +10,7 @@ test('Авторизация с валидными данными', async ({ pag
     await app.login.open();
     await app.login.login(user);
     await app.account.openSettings();
-    await expect(page.getByRole('main')).toContainText('bibbyunexpected@wshu.net');
+    await expect(app.account.getMain()).toContainText('bibbyunexpected@wshu.net');
 });
 
 test('Добавление шаблона сообщения', async ({ page }) => {
@@ -19,8 +19,8 @@ test('Добавление шаблона сообщения', async ({ page }) 
     await app.login.login(user);
     await app.account.openTemplates();
     await app.template.addTemplate(template);
-    await expect(page.locator('.list')).toContainText(template.title);
-    await expect(page.locator('.v-snack__content')).toContainText('У вас новый шаблон');
+    await expect(page.getByText(template.title)).toBeVisible();
+    await expect(app.template.getSnackbar()).toContainText('У вас новый шаблон');
 });
 
 test('Добавление тега', async ({ page }) => {
@@ -42,8 +42,8 @@ test('Добавление tg bot', async ({ page }) => {
     await app.account.open();
     await app.account.openChannels();
 
-    expect(page.locator('div').filter({ hasText: /^Активен$/ }).first()).toBeVisible();
-    expect(page.locator('.v-snackbar__content')).toContainText('Вы добавили канал. На нем автоматически включился автоответ: «Первое входящее»');
+    await expect(app.channel.getActiveStatus()).toBeVisible();
+    await expect(app.channel.getSnackbar()).toContainText('Вы добавили канал. На нем автоматически включился автоответ: «Первое входящее»');
 });
 
 test('Удаление канала', async ({ page }) => {
@@ -56,5 +56,5 @@ test('Удаление канала', async ({ page }) => {
     await page.reload();
     await app.channel.deleteChannel();
    
-    await expect(page.getByRole('status')).toContainText('Канал удален из сервиса');
+    await expect(app.channel.getDeleteSnackbar()).toContainText('Канал удален из сервиса');
 });
