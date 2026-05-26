@@ -6,30 +6,16 @@ pipeline {
         ALLURE_REPORT = 'allure-report'
         ALLURE_ENDPOINT = 'https://allure.autotests.cloud'
         ALLURE_PROJECT_ID = '5218'
-        API_BASE_URL = 'https://api.dev-wazzup24.com/v3'
-        BASE_URL = 'https://app.dev-wazzup24.com'
     }
 
     stages {
         stage('Build') {
             steps {
-                withCredentials([
-                    string(credentialsId: 'api-token', variable: 'API_TOKEN'),
-                    string(credentialsId: 'test-user-email', variable: 'TEST_USER_EMAIL'),
-                    string(credentialsId: 'test-user-password', variable: 'TEST_USER_PASSWORD'),
-                    string(credentialsId: 'test-channel-token', variable: 'TEST_CHANNEL_TOKEN'),
-                    string(credentialsId: 'test-channel-token-2', variable: 'TEST_CHANNEL_TOKEN_2')
-                ]) {
+                withCredentials([file(credentialsId: 'your-env-file-id', variable: 'ENV_FILE')]) {
                     nodejs('NodeJS22.22.0') {
                         sh '''
-                            # Создаём .env файл из Jenkins Credentials
-                            echo "API_TOKEN=${API_TOKEN}" > .env
-                            echo "API_BASE_URL=${API_BASE_URL}" >> .env
-                            echo "BASE_URL=${BASE_URL}" >> .env
-                            echo "TEST_USER_EMAIL=${TEST_USER_EMAIL}" >> .env
-                            echo "TEST_USER_PASSWORD=${TEST_USER_PASSWORD}" >> .env
-                            echo "TEST_CHANNEL_TOKEN=${TEST_CHANNEL_TOKEN}" >> .env
-                            echo "TEST_CHANNEL_TOKEN_2=${TEST_CHANNEL_TOKEN_2}" >> .env
+                            # Копируем секретный .env файл в рабочую директорию
+                            cp ${ENV_FILE} .env
                             
                             npm ci
                             npx playwright install chromium --with-deps
@@ -73,15 +59,11 @@ pipeline {
 
         stage('Telegram Notification') {
             steps {
-                withCredentials([
-                    string(credentialsId: 'telegram-token_for_diploma', variable: 'TELEGRAM_TOKEN'),
-                    string(credentialsId: 'telegram-chat-id', variable: 'TELEGRAM_CHAT_ID')
-                ]) {
+                withCredentials([string(credentialsId: 'telegram-token_for_diploma', variable: 'TELEGRAM_TOKEN')]) {
                     nodejs('NodeJS22.22.0') {
                         sh '''
                             java -DconfigFile=notifications/telegram.json \
                                  -Dtelegram.token=${TELEGRAM_TOKEN} \
-                                 -Dtelegram.chat=${TELEGRAM_CHAT_ID} \
                                  -jar notifications/allure-notifications-4.11.0.jar || echo "Telegram notification failed"
                         '''
                     }
