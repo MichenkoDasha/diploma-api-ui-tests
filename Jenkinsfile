@@ -15,17 +15,6 @@ pipeline {
                     nodejs('NodeJS22.22.0') {
                        sh '''
                         cp ${ENV_FILE} .env
-                        
-                        # Загружаем переменные в окружение через eval
-                        while IFS='=' read -r key value; do
-                            if [ -n "$key" ] && [ "${key:0:1}" != "#" ]; then
-                                eval export "$key='$value'"
-                            fi
-                        done < .env
-                        
-                        # Проверка (можно убрать после отладки)
-                        echo "API_BASE_URL = $API_BASE_URL"
-                        
                         npm ci
                         npx playwright install chromium --with-deps
                         npm add allure

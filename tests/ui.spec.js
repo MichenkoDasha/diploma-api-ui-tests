@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import { test, expect } from '../src/helpers/fixtures/fixture';
 import { UserBuilder, TemplateBuilder, TagBuilder } from '../src/helpers/builders/index';
 

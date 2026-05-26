@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import { test, expect } from '../src/helpers/fixtures/fixture';
 import { userApiBuilder } from '../src/helpers/builders/index';
 import { Api } from '../src/services/api.service';
