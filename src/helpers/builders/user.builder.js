@@ -1,10 +1,10 @@
 export class UserBuilder {
     withEmail(){
-        this.email = 'bibbyunexpected@wshu.net';
+        this.email = process.env.TEST_USER_EMAIL;
         return this;
 }
      withPassword(){
-        this.password = 'bibbyunexpected@wshu.net';
+        this.password = process.env.TEST_USER_PASSWORD;
         return this;
 }
   

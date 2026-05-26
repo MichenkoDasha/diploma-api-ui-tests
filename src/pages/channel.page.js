@@ -10,14 +10,16 @@ export class ChannelPage {
         this.deleteButton = page.locator('.v-card-actions.actions button').nth(1);
         this.deleteChats = page.getByText('Удалить канал вместе с сообщениями и контактами');
         this.delButton = page.getByRole('button', { name: 'Удалить' });
+        this.activeStatus = page.locator('div').filter({ hasText: /^Активен$/ }).first();
+        this.snackbar = page.locator('.v-snackbar__content');
+        this.deleteSnacbar = page.getByRole('status');
 
     }
    async addChannel(token) {
-        const botToken = token || '8719413437:AAG9EzbR3pnsqDoYX3rBThWowE4FI08q7lg';
         await this.addChannelButton.click();
         await this.channel.click();
         await this.bot.click();
-        await this.tokenInput.fill(botToken);
+        await this.tokenInput.fill(token);
         await this.addButton.click();
    }
 
@@ -26,5 +28,16 @@ export class ChannelPage {
         await this.deleteButton.click();
         await this.deleteChats.click();
         await this.delButton.click();
+    }
+    
+    getActiveStatus() {
+        return this.activeStatus;
+    }
+    
+    getSnackbar() {
+        return this.snackbar;
+    }
+    getDeleteSnackbar() {
+        return this.deleteSnacbar;
     }
 }

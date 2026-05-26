@@ -6,7 +6,6 @@ export const test = base.extend({
     app: async( {page}, use ) => {
 
         const app = new App(page);
-        await app.main.open();
         await use(app);
 
     },

@@ -19,6 +19,6 @@ export class LoginPage {
         await this.signupLink.click();
     }
     async open() {
-        await this.page.goto('https://app.dev-wazzup24.com/login/');
+        await this.page.goto('/login/');
     }
 }

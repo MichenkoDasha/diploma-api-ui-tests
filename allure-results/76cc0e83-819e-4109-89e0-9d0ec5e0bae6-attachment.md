@@ -1,0 +1,1001 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: ui.spec.js >> Добавление шаблона сообщения
+- Location: tests/ui.spec.js:14:5
+
+# Error details
+
+```
+Error: expect(locator).toBeVisible() failed
+
+Locator:  locator('title')
+Expected: visible
+Received: hidden
+Timeout:  5000ms
+
+Call log:
+  - Expect "toBeVisible" with timeout 5000ms
+  - waiting for locator('title')
+    9 × locator resolved to <title>Wazzup</title>
+      - unexpected value "hidden"
+
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e4]:
+  - generic [ref=e5]:
+    - banner [ref=e6]:
+      - generic [ref=e9]:
+        - heading "Шаблоны сообщений" [level=1] [ref=e10]
+        - link "Помощь с настройкой" [ref=e11] [cursor=pointer]:
+          - /url: https://wazzup24.ru/contact/
+          - generic [ref=e12]: Помощь с настройкой
+    - navigation [ref=e13]:
+      - generic [ref=e15]:
+        - generic [ref=e16]:
+          - generic [ref=e18]:
+            - button [ref=e19] [cursor=pointer]:
+              - img [ref=e22]
+            - 'heading "Wazzup: 1798-9091" [level=3] [ref=e24]'
+          - generic [ref=e25]:
+            - listbox [ref=e26]:
+              - link "Каналы" [ref=e27] [cursor=pointer]:
+                - /url: /1798-9091/settings/channels
+                - img [ref=e31]
+                - generic [ref=e33]: Каналы
+              - link "Интеграция с CRM" [ref=e34] [cursor=pointer]:
+                - /url: /1798-9091/settings/integrations
+                - img [ref=e38]
+                - generic [ref=e40]: Интеграция с CRM
+              - link "Моб. приложение" [ref=e41] [cursor=pointer]:
+                - /url: /1798-9091/settings/mobile
+                - img [ref=e45]
+                - generic [ref=e47]: Моб. приложение
+              - link "Подписки" [ref=e48] [cursor=pointer]:
+                - /url: /1798-9091/settings/subscriptions
+                - img [ref=e52]
+                - generic [ref=e54]: Подписки
+              - link "Бонусный счет" [ref=e55] [cursor=pointer]:
+                - /url: /1798-9091/settings/partner
+                - img [ref=e59]
+                - generic [ref=e61]: Бонусный счет
+              - link "Шаблоны сообщений" [ref=e62] [cursor=pointer]:
+                - /url: /1798-9091/settings/templates?tab=wazzup
+                - img [ref=e66]
+                - generic [ref=e68]: Шаблоны сообщений
+              - link "Уведомления" [ref=e69] [cursor=pointer]:
+                - /url: /1798-9091/settings/notifications
+                - img [ref=e73]
+                - generic [ref=e75]: Уведомления
+              - link "Автоответы" [ref=e76] [cursor=pointer]:
+                - /url: /1798-9091/settings/autoresponders
+                - img [ref=e80]
+                - generic [ref=e82]: Автоответы
+              - link "Аналитика" [ref=e83] [cursor=pointer]:
+                - /url: /1798-9091/settings/analytics
+                - img [ref=e87]
+                - generic [ref=e89]: Аналитика
+              - link "Настройки аккаунта" [ref=e90] [cursor=pointer]:
+                - /url: /1798-9091/settings/account
+                - img [ref=e94]
+                - generic [ref=e96]: Настройки аккаунта
+            - separator [ref=e98]
+            - listbox [ref=e99]:
+              - link "Чаты" [ref=e100] [cursor=pointer]:
+                - /url: /1798-9091/chat
+                - img [ref=e103]
+                - generic [ref=e105]: Чаты
+        - generic [ref=e107]:
+          - separator [ref=e109]
+          - generic [ref=e110] [cursor=pointer]:
+            - img [ref=e113]
+            - generic [ref=e115]: Виджет на сайт
+          - link "База знаний" [ref=e116] [cursor=pointer]:
+            - /url: https://wazzup24.ru/help/
+            - img [ref=e119]
+            - generic [ref=e121]: База знаний
+          - generic [ref=e122] [cursor=pointer]:
+            - img [ref=e125]
+            - generic [ref=e127]: Поддержка
+    - main [ref=e129]:
+      - generic [ref=e131]:
+        - tablist [ref=e133]:
+          - generic [ref=e135]:
+            - tab "ШАБЛОНЫ WAZZUP" [selected] [ref=e138] [cursor=pointer]
+            - tab "ШАБЛОНЫ WABA" [ref=e139] [cursor=pointer]
+        - generic [ref=e143]:
+          - generic [ref=e144]:
+            - button "ДОБАВИТЬ ШАБЛОН" [ref=e145] [cursor=pointer]:
+              - generic [ref=e146]:
+                - img [ref=e148]
+                - text: ДОБАВИТЬ ШАБЛОН
+            - link "Как работать с шаблонами Wazzup" [ref=e150] [cursor=pointer]:
+              - /url: https://wazzup24.ru/help/sell-easier/templates-in-wazzup-ru/
+              - text: Как работать с шаблонами Wazzup
+              - img [ref=e152]
+          - generic [ref=e154]:
+            - generic [ref=e155]:
+              - generic [ref=e158]:
+                - group
+                - textbox "Поиск" [ref=e160]
+              - generic [ref=e162]:
+                - button "Поиск шаблонов по тегу" [ref=e165] [cursor=pointer]:
+                  - group
+                  - generic [ref=e166]:
+                    - generic: Поиск шаблонов по тегу
+                    - generic [ref=e167]:
+                      - textbox "Поиск шаблонов по тегу"
+                    - img [ref=e172]
+                - button [ref=e174] [cursor=pointer]:
+                  - img [ref=e175]
+            - generic [ref=e177]:
+              - generic [ref=e178]: 1-50 из 53
+              - button [disabled]:
+                - generic:
+                  - generic:
+                    - img
+              - button [ref=e179] [cursor=pointer]:
+                - img [ref=e182]
+          - generic [ref=e184]:
+            - generic [ref=e185]:
+              - heading "Название и описание шаблона" [level=5] [ref=e187]
+              - heading "Файлы" [level=5] [ref=e189]
+              - generic [ref=e190]:
+                - heading "Теги" [level=5] [ref=e191]
+                - button [ref=e193] [cursor=pointer]:
+                  - img [ref=e194]
+            - generic [ref=e196]:
+              - generic [ref=e198]:
+                - generic [ref=e200]:
+                  - generic [ref=e202]:
+                    - generic "Spectacled bear-test-459" [ref=e203]
+                    - generic "American black bear" [ref=e204]
+                  - generic [ref=e205]:
+                    - img [ref=e207]
+                    - text: "0"
+                  - button "Нет тега" [ref=e211] [cursor=pointer]:
+                    - img [ref=e213]
+                    - generic [ref=e215]: Нет тега
+                  - generic [ref=e216]:
+                    - button [ref=e217] [cursor=pointer]:
+                      - img [ref=e220]
+                    - separator [ref=e222]
+                    - img [ref=e225]
+                - generic [ref=e228]:
+                  - generic [ref=e230]:
+                    - generic "Polar bear-test-37" [ref=e231]
+                    - generic "Asian black bear" [ref=e232]
+                  - generic [ref=e233]:
+                    - img [ref=e235]
+                    - text: "0"
+                  - button "Нет тега" [ref=e239] [cursor=pointer]:
+                    - img [ref=e241]
+                    - generic [ref=e243]: Нет тега
+                  - generic [ref=e244]:
+                    - button [ref=e245] [cursor=pointer]:
+                      - img [ref=e248]
+                    - separator [ref=e250]
+                    - img [ref=e253]
+                - generic [ref=e256]:
+                  - generic [ref=e258]:
+                    - generic "Giant panda-test-269" [ref=e259]
+                    - generic "Brown bear" [ref=e260]
+                  - generic [ref=e261]:
+                    - img [ref=e263]
+                    - text: "0"
+                  - button "Нет тега" [ref=e267] [cursor=pointer]:
+                    - img [ref=e269]
+                    - generic [ref=e271]: Нет тега
+                  - generic [ref=e272]:
+                    - button [ref=e273] [cursor=pointer]:
+                      - img [ref=e276]
+                    - separator [ref=e278]
+                    - img [ref=e281]
+                - generic [ref=e284]:
+                  - generic [ref=e286]:
+                    - generic "Brown bear-test-168" [ref=e287]
+                    - generic "Brown bear" [ref=e288]
+                  - generic [ref=e289]:
+                    - img [ref=e291]
+                    - text: "0"
+                  - button "Нет тега" [ref=e295] [cursor=pointer]:
+                    - img [ref=e297]
+                    - generic [ref=e299]: Нет тега
+                  - generic [ref=e300]:
+                    - button [ref=e301] [cursor=pointer]:
+                      - img [ref=e304]
+                    - separator [ref=e306]
+                    - img [ref=e309]
+                - generic [ref=e312]:
+                  - generic [ref=e314]:
+                    - generic "Polar bear-test-693" [ref=e315]
+                    - generic "Polar bear" [ref=e316]
+                  - generic [ref=e317]:
+                    - img [ref=e319]
+                    - text: "0"
+                  - button "Нет тега" [ref=e323] [cursor=pointer]:
+                    - img [ref=e325]
+                    - generic [ref=e327]: Нет тега
+                  - generic [ref=e328]:
+                    - button [ref=e329] [cursor=pointer]:
+                      - img [ref=e332]
+                    - separator [ref=e334]
+                    - img [ref=e337]
+                - generic [ref=e340]:
+                  - generic [ref=e342]:
+                    - generic "Sloth bear-test-835" [ref=e343]
+                    - generic "American black bear" [ref=e344]
+                  - generic [ref=e345]:
+                    - img [ref=e347]
+                    - text: "0"
+                  - button "Нет тега" [ref=e351] [cursor=pointer]:
+                    - img [ref=e353]
+                    - generic [ref=e355]: Нет тега
+                  - generic [ref=e356]:
+                    - button [ref=e357] [cursor=pointer]:
+                      - img [ref=e360]
+                    - separator [ref=e362]
+                    - img [ref=e365]
+                - generic [ref=e368]:
+                  - generic [ref=e370]:
+                    - generic "Spectacled bear-test-631" [ref=e371]
+                    - generic "Sun bear" [ref=e372]
+                  - generic [ref=e373]:
+                    - img [ref=e375]
+                    - text: "0"
+                  - button "Нет тега" [ref=e379] [cursor=pointer]:
+                    - img [ref=e381]
+                    - generic [ref=e383]: Нет тега
+                  - generic [ref=e384]:
+                    - button [ref=e385] [cursor=pointer]:
+                      - img [ref=e388]
+                    - separator [ref=e390]
+                    - img [ref=e393]
+                - generic [ref=e396]:
+                  - generic [ref=e398]:
+                    - generic "Polar bear-test-612" [ref=e399]
+                    - generic "Spectacled bear" [ref=e400]
+                  - generic [ref=e401]:
+                    - img [ref=e403]
+                    - text: "0"
+                  - button "Нет тега" [ref=e407] [cursor=pointer]:
+                    - img [ref=e409]
+                    - generic [ref=e411]: Нет тега
+                  - generic [ref=e412]:
+                    - button [ref=e413] [cursor=pointer]:
+                      - img [ref=e416]
+                    - separator [ref=e418]
+                    - img [ref=e421]
+                - generic [ref=e424]:
+                  - generic [ref=e426]:
+                    - generic "Sloth bear-test-199" [ref=e427]
+                    - generic "Spectacled bear" [ref=e428]
+                  - generic [ref=e429]:
+                    - img [ref=e431]
+                    - text: "0"
+                  - button "Нет тега" [ref=e435] [cursor=pointer]:
+                    - img [ref=e437]
+                    - generic [ref=e439]: Нет тега
+                  - generic [ref=e440]:
+                    - button [ref=e441] [cursor=pointer]:
+                      - img [ref=e444]
+                    - separator [ref=e446]
+                    - img [ref=e449]
+                - generic [ref=e452]:
+                  - generic [ref=e454]:
+                    - generic "Sloth bear-test-821" [ref=e455]
+                    - generic "Brown bear" [ref=e456]
+                  - generic [ref=e457]:
+                    - img [ref=e459]
+                    - text: "0"
+                  - button "Нет тега" [ref=e463] [cursor=pointer]:
+                    - img [ref=e465]
+                    - generic [ref=e467]: Нет тега
+                  - generic [ref=e468]:
+                    - button [ref=e469] [cursor=pointer]:
+                      - img [ref=e472]
+                    - separator [ref=e474]
+                    - img [ref=e477]
+                - generic [ref=e480]:
+                  - generic [ref=e482]:
+                    - generic "Giant panda-test-600" [ref=e483]
+                    - generic "Polar bear" [ref=e484]
+                  - generic [ref=e485]:
+                    - img [ref=e487]
+                    - text: "0"
+                  - button "Нет тега" [ref=e491] [cursor=pointer]:
+                    - img [ref=e493]
+                    - generic [ref=e495]: Нет тега
+                  - generic [ref=e496]:
+                    - button [ref=e497] [cursor=pointer]:
+                      - img [ref=e500]
+                    - separator [ref=e502]
+                    - img [ref=e505]
+                - generic [ref=e508]:
+                  - generic [ref=e510]:
+                    - generic "American black bear-test-393" [ref=e511]
+                    - generic "Sun bear" [ref=e512]
+                  - generic [ref=e513]:
+                    - img [ref=e515]
+                    - text: "0"
+                  - button "Нет тега" [ref=e519] [cursor=pointer]:
+                    - img [ref=e521]
+                    - generic [ref=e523]: Нет тега
+                  - generic [ref=e524]:
+                    - button [ref=e525] [cursor=pointer]:
+                      - img [ref=e528]
+                    - separator [ref=e530]
+                    - img [ref=e533]
+                - generic [ref=e536]:
+                  - generic [ref=e538]:
+                    - generic "Giant panda-test-832" [ref=e539]
+                    - generic "Sloth bear" [ref=e540]
+                  - generic [ref=e541]:
+                    - img [ref=e543]
+                    - text: "0"
+                  - button "Нет тега" [ref=e547] [cursor=pointer]:
+                    - img [ref=e549]
+                    - generic [ref=e551]: Нет тега
+                  - generic [ref=e552]:
+                    - button [ref=e553] [cursor=pointer]:
+                      - img [ref=e556]
+                    - separator [ref=e558]
+                    - img [ref=e561]
+                - generic [ref=e564]:
+                  - generic [ref=e566]:
+                    - generic "Sloth bear-test-190" [ref=e567]
+                    - generic "Spectacled bear" [ref=e568]
+                  - generic [ref=e569]:
+                    - img [ref=e571]
+                    - text: "0"
+                  - button "Нет тега" [ref=e575] [cursor=pointer]:
+                    - img [ref=e577]
+                    - generic [ref=e579]: Нет тега
+                  - generic [ref=e580]:
+                    - button [ref=e581] [cursor=pointer]:
+                      - img [ref=e584]
+                    - separator [ref=e586]
+                    - img [ref=e589]
+                - generic [ref=e592]:
+                  - generic [ref=e594]:
+                    - generic "Polar bear-test-199" [ref=e595]
+                    - generic "American black bear" [ref=e596]
+                  - generic [ref=e597]:
+                    - img [ref=e599]
+                    - text: "0"
+                  - button "Нет тега" [ref=e603] [cursor=pointer]:
+                    - img [ref=e605]
+                    - generic [ref=e607]: Нет тега
+                  - generic [ref=e608]:
+                    - button [ref=e609] [cursor=pointer]:
+                      - img [ref=e612]
+                    - separator [ref=e614]
+                    - img [ref=e617]
+                - generic [ref=e620]:
+                  - generic [ref=e622]:
+                    - generic "Spectacled bear-test-870" [ref=e623]
+                    - generic "Giant panda" [ref=e624]
+                  - generic [ref=e625]:
+                    - img [ref=e627]
+                    - text: "0"
+                  - button "Нет тега" [ref=e631] [cursor=pointer]:
+                    - img [ref=e633]
+                    - generic [ref=e635]: Нет тега
+                  - generic [ref=e636]:
+                    - button [ref=e637] [cursor=pointer]:
+                      - img [ref=e640]
+                    - separator [ref=e642]
+                    - img [ref=e645]
+                - generic [ref=e648]:
+                  - generic [ref=e650]:
+                    - generic "Asian black bear-test-403" [ref=e651]
+                    - generic "Giant panda" [ref=e652]
+                  - generic [ref=e653]:
+                    - img [ref=e655]
+                    - text: "0"
+                  - button "Нет тега" [ref=e659] [cursor=pointer]:
+                    - img [ref=e661]
+                    - generic [ref=e663]: Нет тега
+                  - generic [ref=e664]:
+                    - button [ref=e665] [cursor=pointer]:
+                      - img [ref=e668]
+                    - separator [ref=e670]
+                    - img [ref=e673]
+                - generic [ref=e676]:
+                  - generic [ref=e678]:
+                    - generic "Spectacled bear-test-494" [ref=e679]
+                    - generic "Polar bear" [ref=e680]
+                  - generic [ref=e681]:
+                    - img [ref=e683]
+                    - text: "0"
+                  - button "Нет тега" [ref=e687] [cursor=pointer]:
+                    - img [ref=e689]
+                    - generic [ref=e691]: Нет тега
+                  - generic [ref=e692]:
+                    - button [ref=e693] [cursor=pointer]:
+                      - img [ref=e696]
+                    - separator [ref=e698]
+                    - img [ref=e701]
+                - generic [ref=e704]:
+                  - generic [ref=e706]:
+                    - generic "Polar bear-test-313" [ref=e707]
+                    - generic "Sun bear" [ref=e708]
+                  - generic [ref=e709]:
+                    - img [ref=e711]
+                    - text: "0"
+                  - button "Нет тега" [ref=e715] [cursor=pointer]:
+                    - img [ref=e717]
+                    - generic [ref=e719]: Нет тега
+                  - generic [ref=e720]:
+                    - button [ref=e721] [cursor=pointer]:
+                      - img [ref=e724]
+                    - separator [ref=e726]
+                    - img [ref=e729]
+                - generic [ref=e732]:
+                  - generic [ref=e734]:
+                    - generic "Sloth bear-test-514" [ref=e735]
+                    - generic "Brown bear" [ref=e736]
+                  - generic [ref=e737]:
+                    - img [ref=e739]
+                    - text: "0"
+                  - button "Нет тега" [ref=e743] [cursor=pointer]:
+                    - img [ref=e745]
+                    - generic [ref=e747]: Нет тега
+                  - generic [ref=e748]:
+                    - button [ref=e749] [cursor=pointer]:
+                      - img [ref=e752]
+                    - separator [ref=e754]
+                    - img [ref=e757]
+                - generic [ref=e760]:
+                  - generic [ref=e762]:
+                    - generic "Polar bear-test-170" [ref=e763]
+                    - generic "Sloth bear" [ref=e764]
+                  - generic [ref=e765]:
+                    - img [ref=e767]
+                    - text: "0"
+                  - button "Нет тега" [ref=e771] [cursor=pointer]:
+                    - img [ref=e773]
+                    - generic [ref=e775]: Нет тега
+                  - generic [ref=e776]:
+                    - button [ref=e777] [cursor=pointer]:
+                      - img [ref=e780]
+                    - separator [ref=e782]
+                    - img [ref=e785]
+                - generic [ref=e788]:
+                  - generic [ref=e790]:
+                    - generic "Sloth bear-test-78" [ref=e791]
+                    - generic "Asian black bear" [ref=e792]
+                  - generic [ref=e793]:
+                    - img [ref=e795]
+                    - text: "0"
+                  - button "Нет тега" [ref=e799] [cursor=pointer]:
+                    - img [ref=e801]
+                    - generic [ref=e803]: Нет тега
+                  - generic [ref=e804]:
+                    - button [ref=e805] [cursor=pointer]:
+                      - img [ref=e808]
+                    - separator [ref=e810]
+                    - img [ref=e813]
+                - generic [ref=e816]:
+                  - generic [ref=e818]:
+                    - generic "Sun bear-test-631" [ref=e819]
+                    - generic "Brown bear" [ref=e820]
+                  - generic [ref=e821]:
+                    - img [ref=e823]
+                    - text: "0"
+                  - button "Нет тега" [ref=e827] [cursor=pointer]:
+                    - img [ref=e829]
+                    - generic [ref=e831]: Нет тега
+                  - generic [ref=e832]:
+                    - button [ref=e833] [cursor=pointer]:
+                      - img [ref=e836]
+                    - separator [ref=e838]
+                    - img [ref=e841]
+                - generic [ref=e844]:
+                  - generic [ref=e846]:
+                    - generic "Asian black bear-test-770" [ref=e847]
+                    - generic "Sloth bear" [ref=e848]
+                  - generic [ref=e849]:
+                    - img [ref=e851]
+                    - text: "0"
+                  - button "Нет тега" [ref=e855] [cursor=pointer]:
+                    - img [ref=e857]
+                    - generic [ref=e859]: Нет тега
+                  - generic [ref=e860]:
+                    - button [ref=e861] [cursor=pointer]:
+                      - img [ref=e864]
+                    - separator [ref=e866]
+                    - img [ref=e869]
+                - generic [ref=e872]:
+                  - generic [ref=e874]:
+                    - generic "Asian black bear-test-617" [ref=e875]
+                    - generic "Sloth bear" [ref=e876]
+                  - generic [ref=e877]:
+                    - img [ref=e879]
+                    - text: "0"
+                  - button "Нет тега" [ref=e883] [cursor=pointer]:
+                    - img [ref=e885]
+                    - generic [ref=e887]: Нет тега
+                  - generic [ref=e888]:
+                    - button [ref=e889] [cursor=pointer]:
+                      - img [ref=e892]
+                    - separator [ref=e894]
+                    - img [ref=e897]
+                - generic [ref=e900]:
+                  - generic [ref=e902]:
+                    - generic "Giant panda-test-658" [ref=e903]
+                    - generic "Brown bear" [ref=e904]
+                  - generic [ref=e905]:
+                    - img [ref=e907]
+                    - text: "0"
+                  - button "Нет тега" [ref=e911] [cursor=pointer]:
+                    - img [ref=e913]
+                    - generic [ref=e915]: Нет тега
+                  - generic [ref=e916]:
+                    - button [ref=e917] [cursor=pointer]:
+                      - img [ref=e920]
+                    - separator [ref=e922]
+                    - img [ref=e925]
+                - generic [ref=e928]:
+                  - generic [ref=e930]:
+                    - generic "Sloth bear-test-738" [ref=e931]
+                    - generic "Spectacled bear" [ref=e932]
+                  - generic [ref=e933]:
+                    - img [ref=e935]
+                    - text: "0"
+                  - button "Нет тега" [ref=e939] [cursor=pointer]:
+                    - img [ref=e941]
+                    - generic [ref=e943]: Нет тега
+                  - generic [ref=e944]:
+                    - button [ref=e945] [cursor=pointer]:
+                      - img [ref=e948]
+                    - separator [ref=e950]
+                    - img [ref=e953]
+                - generic [ref=e956]:
+                  - generic [ref=e958]:
+                    - generic "Sloth bear-test-73" [ref=e959]
+                    - generic "Polar bear" [ref=e960]
+                  - generic [ref=e961]:
+                    - img [ref=e963]
+                    - text: "0"
+                  - button "Нет тега" [ref=e967] [cursor=pointer]:
+                    - img [ref=e969]
+                    - generic [ref=e971]: Нет тега
+                  - generic [ref=e972]:
+                    - button [ref=e973] [cursor=pointer]:
+                      - img [ref=e976]
+                    - separator [ref=e978]
+                    - img [ref=e981]
+                - generic [ref=e984]:
+                  - generic [ref=e986]:
+                    - generic "Sloth bear-test-338" [ref=e987]
+                    - generic "Giant panda" [ref=e988]
+                  - generic [ref=e989]:
+                    - img [ref=e991]
+                    - text: "0"
+                  - button "Нет тега" [ref=e995] [cursor=pointer]:
+                    - img [ref=e997]
+                    - generic [ref=e999]: Нет тега
+                  - generic [ref=e1000]:
+                    - button [ref=e1001] [cursor=pointer]:
+                      - img [ref=e1004]
+                    - separator [ref=e1006]
+                    - img [ref=e1009]
+                - generic [ref=e1012]:
+                  - generic [ref=e1014]:
+                    - generic "Sun bear-test-199" [ref=e1015]
+                    - generic "American black bear" [ref=e1016]
+                  - generic [ref=e1017]:
+                    - img [ref=e1019]
+                    - text: "0"
+                  - button "Нет тега" [ref=e1023] [cursor=pointer]:
+                    - img [ref=e1025]
+                    - generic [ref=e1027]: Нет тега
+                  - generic [ref=e1028]:
+                    - button [ref=e1029] [cursor=pointer]:
+                      - img [ref=e1032]
+                    - separator [ref=e1034]
+                    - img [ref=e1037]
+                - generic [ref=e1040]:
+                  - generic [ref=e1042]:
+                    - generic "Giant panda-test-637" [ref=e1043]
+                    - generic "Spectacled bear" [ref=e1044]
+                  - generic [ref=e1045]:
+                    - img [ref=e1047]
+                    - text: "0"
+                  - button "Нет тега" [ref=e1051] [cursor=pointer]:
+                    - img [ref=e1053]
+                    - generic [ref=e1055]: Нет тега
+                  - generic [ref=e1056]:
+                    - button [ref=e1057] [cursor=pointer]:
+                      - img [ref=e1060]
+                    - separator [ref=e1062]
+                    - img [ref=e1065]
+                - generic [ref=e1068]:
+                  - generic [ref=e1070]:
+                    - generic "American black bear-test-878" [ref=e1071]
+                    - generic "Asian black bear" [ref=e1072]
+                  - generic [ref=e1073]:
+                    - img [ref=e1075]
+                    - text: "0"
+                  - button "Нет тега" [ref=e1079] [cursor=pointer]:
+                    - img [ref=e1081]
+                    - generic [ref=e1083]: Нет тега
+                  - generic [ref=e1084]:
+                    - button [ref=e1085] [cursor=pointer]:
+                      - img [ref=e1088]
+                    - separator [ref=e1090]
+                    - img [ref=e1093]
+                - generic [ref=e1096]:
+                  - generic [ref=e1098]:
+                    - generic "Spectacled bear-test-20" [ref=e1099]
+                    - generic "American black bear" [ref=e1100]
+                  - generic [ref=e1101]:
+                    - img [ref=e1103]
+                    - text: "0"
+                  - button "Нет тега" [ref=e1107] [cursor=pointer]:
+                    - img [ref=e1109]
+                    - generic [ref=e1111]: Нет тега
+                  - generic [ref=e1112]:
+                    - button [ref=e1113] [cursor=pointer]:
+                      - img [ref=e1116]
+                    - separator [ref=e1118]
+                    - img [ref=e1121]
+                - generic [ref=e1124]:
+                  - generic [ref=e1126]:
+                    - generic "Sun bear-test-905" [ref=e1127]
+                    - generic "Polar bear" [ref=e1128]
+                  - generic [ref=e1129]:
+                    - img [ref=e1131]
+                    - text: "0"
+                  - button "Нет тега" [ref=e1135] [cursor=pointer]:
+                    - img [ref=e1137]
+                    - generic [ref=e1139]: Нет тега
+                  - generic [ref=e1140]:
+                    - button [ref=e1141] [cursor=pointer]:
+                      - img [ref=e1144]
+                    - separator [ref=e1146]
+                    - img [ref=e1149]
+                - generic [ref=e1152]:
+                  - generic [ref=e1154]:
+                    - generic "American black bear-test-431" [ref=e1155]
+                    - generic "Polar bear" [ref=e1156]
+                  - generic [ref=e1157]:
+                    - img [ref=e1159]
+                    - text: "0"
+                  - button "Нет тега" [ref=e1163] [cursor=pointer]:
+                    - img [ref=e1165]
+                    - generic [ref=e1167]: Нет тега
+                  - generic [ref=e1168]:
+                    - button [ref=e1169] [cursor=pointer]:
+                      - img [ref=e1172]
+                    - separator [ref=e1174]
+                    - img [ref=e1177]
+                - generic [ref=e1180]:
+                  - generic [ref=e1182]:
+                    - generic "Giant panda-test-170" [ref=e1183]
+                    - generic "Asian black bear" [ref=e1184]
+                  - generic [ref=e1185]:
+                    - img [ref=e1187]
+                    - text: "0"
+                  - button "Нет тега" [ref=e1191] [cursor=pointer]:
+                    - img [ref=e1193]
+                    - generic [ref=e1195]: Нет тега
+                  - generic [ref=e1196]:
+                    - button [ref=e1197] [cursor=pointer]:
+                      - img [ref=e1200]
+                    - separator [ref=e1202]
+                    - img [ref=e1205]
+                - generic [ref=e1208]:
+                  - generic [ref=e1210]:
+                    - generic "Sloth bear-test-485" [ref=e1211]
+                    - generic "American black bear" [ref=e1212]
+                  - generic [ref=e1213]:
+                    - img [ref=e1215]
+                    - text: "0"
+                  - button "Нет тега" [ref=e1219] [cursor=pointer]:
+                    - img [ref=e1221]
+                    - generic [ref=e1223]: Нет тега
+                  - generic [ref=e1224]:
+                    - button [ref=e1225] [cursor=pointer]:
+                      - img [ref=e1228]
+                    - separator [ref=e1230]
+                    - img [ref=e1233]
+                - generic [ref=e1236]:
+                  - generic [ref=e1238]:
+                    - generic "Sloth bear-test-644" [ref=e1239]
+                    - generic "Giant panda" [ref=e1240]
+                  - generic [ref=e1241]:
+                    - img [ref=e1243]
+                    - text: "0"
+                  - button "Нет тега" [ref=e1247] [cursor=pointer]:
+                    - img [ref=e1249]
+                    - generic [ref=e1251]: Нет тега
+                  - generic [ref=e1252]:
+                    - button [ref=e1253] [cursor=pointer]:
+                      - img [ref=e1256]
+                    - separator [ref=e1258]
+                    - img [ref=e1261]
+                - generic [ref=e1264]:
+                  - generic [ref=e1266]:
+                    - generic "Giant panda-test-822" [ref=e1267]
+                    - generic "Sloth bear" [ref=e1268]
+                  - generic [ref=e1269]:
+                    - img [ref=e1271]
+                    - text: "0"
+                  - button "Нет тега" [ref=e1275] [cursor=pointer]:
+                    - img [ref=e1277]
+                    - generic [ref=e1279]: Нет тега
+                  - generic [ref=e1280]:
+                    - button [ref=e1281] [cursor=pointer]:
+                      - img [ref=e1284]
+                    - separator [ref=e1286]
+                    - img [ref=e1289]
+                - generic [ref=e1292]:
+                  - generic [ref=e1294]:
+                    - generic "American black bear-test-768" [ref=e1295]
+                    - generic "Sun bear" [ref=e1296]
+                  - generic [ref=e1297]:
+                    - img [ref=e1299]
+                    - text: "0"
+                  - button "Нет тега" [ref=e1303] [cursor=pointer]:
+                    - img [ref=e1305]
+                    - generic [ref=e1307]: Нет тега
+                  - generic [ref=e1308]:
+                    - button [ref=e1309] [cursor=pointer]:
+                      - img [ref=e1312]
+                    - separator [ref=e1314]
+                    - img [ref=e1317]
+                - generic [ref=e1320]:
+                  - generic [ref=e1322]:
+                    - generic "Sloth bear-test-322" [ref=e1323]
+                    - generic "Asian black bear" [ref=e1324]
+                  - generic [ref=e1325]:
+                    - img [ref=e1327]
+                    - text: "0"
+                  - button "Нет тега" [ref=e1331] [cursor=pointer]:
+                    - img [ref=e1333]
+                    - generic [ref=e1335]: Нет тега
+                  - generic [ref=e1336]:
+                    - button [ref=e1337] [cursor=pointer]:
+                      - img [ref=e1340]
+                    - separator [ref=e1342]
+                    - img [ref=e1345]
+                - generic [ref=e1348]:
+                  - generic [ref=e1350]:
+                    - generic "American black bear-test-479" [ref=e1351]
+                    - generic "Sun bear" [ref=e1352]
+                  - generic [ref=e1353]:
+                    - img [ref=e1355]
+                    - text: "0"
+                  - button "Нет тега" [ref=e1359] [cursor=pointer]:
+                    - img [ref=e1361]
+                    - generic [ref=e1363]: Нет тега
+                  - generic [ref=e1364]:
+                    - button [ref=e1365] [cursor=pointer]:
+                      - img [ref=e1368]
+                    - separator [ref=e1370]
+                    - img [ref=e1373]
+                - generic [ref=e1376]:
+                  - generic [ref=e1378]:
+                    - generic "Asian black bear-test-641" [ref=e1379]
+                    - generic "Giant panda" [ref=e1380]
+                  - generic [ref=e1381]:
+                    - img [ref=e1383]
+                    - text: "0"
+                  - button "Нет тега" [ref=e1387] [cursor=pointer]:
+                    - img [ref=e1389]
+                    - generic [ref=e1391]: Нет тега
+                  - generic [ref=e1392]:
+                    - button [ref=e1393] [cursor=pointer]:
+                      - img [ref=e1396]
+                    - separator [ref=e1398]
+                    - img [ref=e1401]
+                - generic [ref=e1404]:
+                  - generic [ref=e1406]:
+                    - generic "Brown bear-test-432" [ref=e1407]
+                    - generic "Asian black bear" [ref=e1408]
+                  - generic [ref=e1409]:
+                    - img [ref=e1411]
+                    - text: "0"
+                  - button "Нет тега" [ref=e1415] [cursor=pointer]:
+                    - img [ref=e1417]
+                    - generic [ref=e1419]: Нет тега
+                  - generic [ref=e1420]:
+                    - button [ref=e1421] [cursor=pointer]:
+                      - img [ref=e1424]
+                    - separator [ref=e1426]
+                    - img [ref=e1429]
+                - generic [ref=e1432]:
+                  - generic [ref=e1434]:
+                    - generic "Brown bear-test-344" [ref=e1435]
+                    - generic "Sloth bear" [ref=e1436]
+                  - generic [ref=e1437]:
+                    - img [ref=e1439]
+                    - text: "0"
+                  - button "Нет тега" [ref=e1443] [cursor=pointer]:
+                    - img [ref=e1445]
+                    - generic [ref=e1447]: Нет тега
+                  - generic [ref=e1448]:
+                    - button [ref=e1449] [cursor=pointer]:
+                      - img [ref=e1452]
+                    - separator [ref=e1454]
+                    - img [ref=e1457]
+                - generic [ref=e1460]:
+                  - generic [ref=e1462]:
+                    - generic "Sun bear-test-420" [ref=e1463]
+                    - generic "Brown bear" [ref=e1464]
+                  - generic [ref=e1465]:
+                    - img [ref=e1467]
+                    - text: "0"
+                  - button "Нет тега" [ref=e1471] [cursor=pointer]:
+                    - img [ref=e1473]
+                    - generic [ref=e1475]: Нет тега
+                  - generic [ref=e1476]:
+                    - button [ref=e1477] [cursor=pointer]:
+                      - img [ref=e1480]
+                    - separator [ref=e1482]
+                    - img [ref=e1485]
+                - generic [ref=e1488]:
+                  - generic [ref=e1490]:
+                    - generic "Sloth bear-test-617" [ref=e1491]
+                    - generic "Brown bear" [ref=e1492]
+                  - generic [ref=e1493]:
+                    - img [ref=e1495]
+                    - text: "0"
+                  - button "Нет тега" [ref=e1499] [cursor=pointer]:
+                    - img [ref=e1501]
+                    - generic [ref=e1503]: Нет тега
+                  - generic [ref=e1504]:
+                    - button [ref=e1505] [cursor=pointer]:
+                      - img [ref=e1508]
+                    - separator [ref=e1510]
+                    - img [ref=e1513]
+                - generic [ref=e1516]:
+                  - generic [ref=e1518]:
+                    - generic "Sloth bear-test-901" [ref=e1519]
+                    - generic "Sun bear" [ref=e1520]
+                  - generic [ref=e1521]:
+                    - img [ref=e1523]
+                    - text: "0"
+                  - button "Нет тега" [ref=e1527] [cursor=pointer]:
+                    - img [ref=e1529]
+                    - generic [ref=e1531]: Нет тега
+                  - generic [ref=e1532]:
+                    - button [ref=e1533] [cursor=pointer]:
+                      - img [ref=e1536]
+                    - separator [ref=e1538]
+                    - img [ref=e1541]
+                - generic [ref=e1544]:
+                  - generic [ref=e1546]:
+                    - generic "Spectacled bear-test-88" [ref=e1547]
+                    - generic "Asian black bear" [ref=e1548]
+                  - generic [ref=e1549]:
+                    - img [ref=e1551]
+                    - text: "0"
+                  - button "Нет тега" [ref=e1555] [cursor=pointer]:
+                    - img [ref=e1557]
+                    - generic [ref=e1559]: Нет тега
+                  - generic [ref=e1560]:
+                    - button [ref=e1561] [cursor=pointer]:
+                      - img [ref=e1564]
+                    - separator [ref=e1566]
+                    - img [ref=e1569]
+                - generic [ref=e1572]:
+                  - generic [ref=e1574]:
+                    - generic "Sloth bear-test-774" [ref=e1575]
+                    - generic "Brown bear" [ref=e1576]
+                  - generic [ref=e1577]:
+                    - img [ref=e1579]
+                    - text: "0"
+                  - button "Нет тега" [ref=e1583] [cursor=pointer]:
+                    - img [ref=e1585]
+                    - generic [ref=e1587]: Нет тега
+                  - generic [ref=e1588]:
+                    - button [ref=e1589] [cursor=pointer]:
+                      - img [ref=e1592]
+                    - separator [ref=e1594]
+                    - img [ref=e1597]
+                - generic [ref=e1600]:
+                  - generic [ref=e1602]:
+                    - generic "American black bear-test-214" [ref=e1603]
+                    - generic "Polar bear" [ref=e1604]
+                  - generic [ref=e1605]:
+                    - img [ref=e1607]
+                    - text: "0"
+                  - button "Нет тега" [ref=e1611] [cursor=pointer]:
+                    - img [ref=e1613]
+                    - generic [ref=e1615]: Нет тега
+                  - generic [ref=e1616]:
+                    - button [ref=e1617] [cursor=pointer]:
+                      - img [ref=e1620]
+                    - separator [ref=e1622]
+                    - img [ref=e1625]
+              - navigation "Навигация по страницам" [ref=e1628]:
+                - list [ref=e1629]:
+                  - listitem [ref=e1630]:
+                    - button "Предыдущая страница" [disabled]:
+                      - generic:
+                        - img
+                  - listitem [ref=e1631]:
+                    - button "Текущая страница, Страница 1" [ref=e1632] [cursor=pointer]: "1"
+                  - listitem [ref=e1633]:
+                    - button "Перейти на страницу 2" [ref=e1634] [cursor=pointer]: "2"
+                  - listitem [ref=e1635]:
+                    - button "Следующая страница" [ref=e1636] [cursor=pointer]:
+                      - img [ref=e1638]
+  - dialog
+  - generic [ref=e1640]:
+    - status [ref=e1641]:
+      - generic [ref=e1642]:
+        - img [ref=e1644]
+        - generic [ref=e1647]: У вас новый шаблон
+    - button [ref=e1650] [cursor=pointer]:
+      - img [ref=e1653]
+```
+
+# Test source
+
+```ts
+  1  | import { test, expect } from '../src/helpers/fixtures/fixture';
+  2  | import { UserBuilder, TemplateBuilder } from '../src/helpers/builders/index';
+  3  | 
+  4  | const user = new UserBuilder().withEmail().withPassword().build();
+  5  | const template = new TemplateBuilder().withTitle().withText().build();
+  6  | 
+  7  | test('Авторизация с валидными данными', async ({ app }) => {
+  8  |     await app.login.open();
+  9  |     await app.login.login(user);
+  10 |     await app.account.openSettings();
+  11 |     await expect(app.account.getEmail()).toContainText('bibbyunexpected@wshu.net');
+  12 | });
+  13 | 
+  14 | test('Добавление шаблона сообщения', async ({ app }) => {
+  15 |     await app.login.open();
+  16 |     await app.login.login(user);
+  17 |     await app.account.openTemplates();
+  18 |     await app.template.addTemplate(template);
+> 19 |     await expect(app.template.getTemplateTitle()).toBeVisible();
+     |                                                   ^ Error: expect(locator).toBeVisible() failed
+  20 |     await expect(app.template.getSnackbar()).toContainText('У вас новый шаблон');
+  21 | });
+  22 | 
+  23 | test('Добавление тега', async ({ app }) => {
+  24 |     await app.login.open();
+  25 |     await app.login.login(user);
+  26 |     await app.account.openTemplates();
+  27 |     await app.template.addTag();
+  28 |     const generatedTag = await app.template.addTag();
+  29 |     await app.template.tagOpen();
+  30 |     await expect(app.template.tagInput).toHaveValue(generatedTag);
+  31 | });
+  32 | 
+  33 | test('Добавление tg bot', async ({ app }) => {
+  34 |     await app.login.open();
+  35 |     await app.login.login(user);
+  36 |     await app.channel.addChannel();
+  37 |     await app.account.open();
+  38 |     await app.account.openChannels();
+  39 |     await expect(app.channel.getActiveStatus()).toBeVisible();
+  40 |     await expect(app.channel.getSnackbar()).toContainText('Вы добавили канал. На нем автоматически включился автоответ: «Первое входящее»');
+  41 | });
+  42 | 
+  43 | test('Удаление канала', async ({ app }) => {
+  44 |     await app.login.open();
+  45 |     await app.login.login(user);
+  46 |     await app.channel.addChannel('7253844453:AAGw8JkjAieKoIn0EOGqYmX7pL9xawV3Dhg');
+  47 |     await app.account.open();
+  48 |     await app.account.openChannels();
+  49 |     await app.page.reload();
+  50 |     await app.channel.deleteChannel();
+  51 |     await expect(app.channel.getDeleteSnackbar()).toContainText('Канал удален из сервиса');
+  52 | });
+```

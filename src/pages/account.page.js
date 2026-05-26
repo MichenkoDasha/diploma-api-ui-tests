@@ -7,6 +7,7 @@ export class AccountPage {
         this.channel = page.getByRole('link', { name: 'Каналы' });
         this.crm = page.getByRole('link', { name: 'Интеграция с CRM' });
         this.crmRole = page.getByRole('button', { name: 'Выбрать роли' })
+        this.email = page.getByRole('main');
     }
 
     async open() {
@@ -32,4 +33,7 @@ export class AccountPage {
         await this.crmRole.click();
     }
    
+    getEmail() {
+        return this.email;
+    }
 }

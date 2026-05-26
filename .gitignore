@@ -1,3 +1,4 @@
 
 # Playwright
 codegen/
+.env

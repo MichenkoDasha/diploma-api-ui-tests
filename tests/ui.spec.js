@@ -1,60 +1,52 @@
-import { test, expect } from '@playwright/test';
-import { App } from '../src/pages/app.page';
-import { UserBuilder, TemplateBuilder } from '../src/helpers/builders/index';
+import { test, expect } from '../src/helpers/fixtures/fixture';
+import { UserBuilder, TemplateBuilder, TagBuilder } from '../src/helpers/builders/index';
 
 const user = new UserBuilder().withEmail().withPassword().build();
 const template = new TemplateBuilder().withTitle().withText().build();
+const tag = new TagBuilder().withName().build();
 
-test('Авторизация с валидными данными', async ({ page }) => {
-    const app = new App(page);
+test('Авторизация с валидными данными', async ({ app }) => {
     await app.login.open();
     await app.login.login(user);
     await app.account.openSettings();
-    await expect(app.account.getMain()).toContainText('bibbyunexpected@wshu.net');
+    await expect(app.account.getEmail()).toContainText('bibbyunexpected@wshu.net');
 });
 
-test('Добавление шаблона сообщения', async ({ page }) => {
-    const app = new App(page);
+test('Добавление шаблона сообщения', async ({ app }) => {
     await app.login.open();
     await app.login.login(user);
     await app.account.openTemplates();
     await app.template.addTemplate(template);
-    await expect(page.getByText(template.title)).toBeVisible();
+    await expect(app.template.getTemplateTitle()).toBeVisible(template.title);
     await expect(app.template.getSnackbar()).toContainText('У вас новый шаблон');
 });
 
-test('Добавление тега', async ({ page }) => {
-    const app = new App(page);
+test('Добавление тега', async ({ app }) => {
     await app.login.open();
     await app.login.login(user);
     await app.account.openTemplates();
-    await app.template.addTag();
-    const generatedTag = await app.template.addTag();
+    await app.template.addTag(tag);
     await app.template.tagOpen();
-    await expect(app.template.tagInput).toHaveValue(generatedTag);
+    await expect(app.template.tagInput).toHaveValue(tag.name);
 });
 
-test('Добавление tg bot', async ({ page }) => {
-    const app = new App(page);
+test('Добавление tg bot', async ({ app }) => {
     await app.login.open();
     await app.login.login(user);
-    await app.channel.addChannel();
+    await app.channel.addChannel(process.env.TEST_CHANNEL_TOKEN);
     await app.account.open();
     await app.account.openChannels();
-
     await expect(app.channel.getActiveStatus()).toBeVisible();
     await expect(app.channel.getSnackbar()).toContainText('Вы добавили канал. На нем автоматически включился автоответ: «Первое входящее»');
 });
 
-test('Удаление канала', async ({ page }) => {
-    const app = new App(page);
+test('Удаление канала', async ({ app }) => {
     await app.login.open();
     await app.login.login(user);
-    await app.channel.addChannel('7253844453:AAGw8JkjAieKoIn0EOGqYmX7pL9xawV3Dhg');
+    await app.channel.addChannel(process.env.TEST_CHANNEL_TOKEN_2);
     await app.account.open();
     await app.account.openChannels();
-    await page.reload();
+    await app.page.reload();
     await app.channel.deleteChannel();
-   
     await expect(app.channel.getDeleteSnackbar()).toContainText('Канал удален из сервиса');
 });
