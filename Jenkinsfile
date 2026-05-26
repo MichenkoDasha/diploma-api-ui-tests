@@ -17,6 +17,11 @@ pipeline {
                             # Копируем секретный .env файл в рабочую директорию
                             cp ${ENV_FILE} .env
                             
+                            # Загружаем переменные в окружение
+                            set -a
+                            source .env
+                            set +a
+                            
                             npm ci
                             npx playwright install chromium --with-deps
                             npm add allure
