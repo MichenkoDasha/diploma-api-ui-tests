@@ -15,13 +15,12 @@ pipeline {
                     sh 'npm ci'
                     sh 'npx playwright install --with-deps chromium'
                     sh 'npm add allure'
-                    // Запускаем тесты: ошибки не ломают пайплайн
                     sh 'npm t || echo "Tests completed with failures"'
                 }
             }
         }
 
-    stage('Upload to Allure TestOps') {
+        stage('Upload to Allure TestOps') {
             steps {
                 nodejs('NodeJS22.22.0') {
                     withCredentials([string(credentialsId: 'allure-token_for_diploma', variable: 'ALLURE_TOKEN_SECRET')]) {
@@ -49,20 +48,22 @@ pipeline {
                     results: [[path: "${ALLURE_RESULTS}"]]
                 ])
             }
-        } 
+        }
+
         stage('Telegram Notification') {
-    steps {
-        withCredentials([string(credentialsId: 'telegram-token_for_diploma', variable: 'TELEGRAM_TOKEN')]) {
-            nodejs('NodeJS22.22.0') {
-                sh '''
-                    java -DconfigFile=notifications/telegram.json \
-                         -Dtelegram.token=${TELEGRAM_TOKEN} \
-                         -jar notifications/allure-notifications-4.11.0.jar || echo "Telegram notification failed"
-                '''
+            steps {
+                withCredentials([string(credentialsId: 'telegram-token_for_diploma', variable: 'TELEGRAM_TOKEN')]) {
+                    nodejs('NodeJS22.22.0') {
+                        sh '''
+                            java -DconfigFile=notifications/telegram.json \
+                                 -Dtelegram.token=${TELEGRAM_TOKEN} \
+                                 -jar notifications/allure-notifications-4.11.0.jar || echo "Telegram notification failed"
+                        '''
+                    }
+                }
             }
         }
     }
-}
 
     post {
         always {
@@ -75,5 +76,4 @@ pipeline {
             echo '❌ Pipeline failed. Check console output.'
         }
     }
-}
 }
