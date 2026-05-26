@@ -19,7 +19,7 @@ pipeline {
                             
                             # Загружаем переменные в окружение
                             set -a
-                            source .env
+                            . .env
                             set +a
                             
                             npm ci
