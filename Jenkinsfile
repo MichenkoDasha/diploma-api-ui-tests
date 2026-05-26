@@ -16,20 +16,21 @@ pipeline {
                        sh '''
                         cp ${ENV_FILE} .env
                         
-                        # Загружаем переменные в окружение
-                        set -a
-                        . .env
-                        set +a
+                        # Загружаем переменные в окружение через eval
+                        while IFS='=' read -r key value; do
+                            if [ -n "$key" ] && [ "${key:0:1}" != "#" ]; then
+                                eval export "$key='$value'"
+                            fi
+                        done < .env
                         
-                        # Проверяем, что переменные загрузились (для отладки)
+                        # Проверка (можно убрать после отладки)
                         echo "API_BASE_URL = $API_BASE_URL"
-                        echo "API_TOKEN = ${API_TOKEN:0:10}..."
                         
                         npm ci
                         npx playwright install chromium --with-deps
                         npm add allure
                         npm t || echo "Tests completed with failures"
-                        '''
+                    '''
                     }
                 }
             }
