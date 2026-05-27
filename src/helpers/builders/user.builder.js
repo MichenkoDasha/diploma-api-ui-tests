@@ -1,10 +1,11 @@
+import { faker } from '@faker-js/faker';
 export class UserBuilder {
-    withEmail(){
-        this.email = process.env.TEST_USER_EMAIL;
+    withEmail(email = null){
+        this.email = email ?? process.env.TEST_USER_EMAIL ?? faker.internet.email();
         return this;
 }
-     withPassword(){
-        this.password = process.env.TEST_USER_PASSWORD;
+     withPassword(password = null){
+         this.password = password ?? process.env.TEST_USER_PASSWORD ?? faker.internet.password({ length: 12 });
         return this;
 }
   

@@ -3,28 +3,33 @@ dotenv.config();
 
 import { test, expect } from '../src/helpers/fixtures/fixture';
 import { userApiBuilder } from '../src/helpers/builders/index';
-import { Api } from '../src/services/api.service';
 import fs from 'fs';
 
-test('01 - Создать пользователя api', { tag: '@post' }, async ({ request, page }) => {
-    const api = new Api(request);
+test('01 - Создаем пользователя и проверяем его данные', { tag: '@api' }, async ({ api }) => {
     //создаем пользователя
     const userApi = new userApiBuilder()
         .withId()
         .withName()
         .build();
-    console.log(userApi);
     const createdUser = await api.postUser.post(undefined, [userApi]);
     //проверяем, что статус ответа 200, тело ответа не содержит данных пользователя
     expect(createdUser.status).toBe(200);
     expect(createdUser).not.toBeNull();
+    const getUserApi = await api.getUser.get(undefined, userApi.id);
+    //проверяем что поля соответствуют созданному пользователю
+    expect(getUserApi.body).toHaveProperty('accountId');
+    expect(getUserApi.body).toHaveProperty('id');
+    expect(getUserApi.body).toHaveProperty('name');
+    expect(getUserApi.body).toHaveProperty('phone');
+    expect(getUserApi.body.accountId).toBe(17989091); //todo придумать как получать accountId динамически для теста
+    expect(getUserApi.body.id).toBe(userApi.id);
+    expect(getUserApi.body.name).toBe(userApi.name);
+    expect(getUserApi.body.phone).toBe(userApi.phone || null);
 });
 
-test('02 - Получить всех пользователей api', { tag: '@get' }, async ({ request, page }) => {
-    const api = new Api(request);
+test('02 - Получить всех пользователей api', { tag: '@api' }, async ({ api }) => {
     //получаем всех существующих пользователей
     const getAllUsers = await api.getAllUsers.get(undefined);
-    console.log(getAllUsers);
     //проверяем, что массив содержит объекты с нужными полями
     expect(getAllUsers.body).toBeInstanceOf(Array);
     getAllUsers.body.forEach(user => {
@@ -36,39 +41,13 @@ test('02 - Получить всех пользователей api', { tag: '@g
 
 });
 
-test('03 - Получить пользователя api', { tag: '@get' }, async ({ request, page }) => {
-    const api = new Api(request);
-    //создаем пользователя
-    const userApi = new userApiBuilder()
-        .withId()
-        .withName()
-        .build();
-    console.log(userApi);
-    const createdUser = await api.postUser.post(undefined, [userApi]);
-    //получаем созданного пользователя по id
-    const getUserApi = await api.getUser.get(undefined, userApi.id);
-    console.log(getUserApi);
-    //проверяем что поля соответствуют созданному пользователю
-    expect(getUserApi.body).toHaveProperty('accountId');
-    expect(getUserApi.body).toHaveProperty('id');
-    expect(getUserApi.body).toHaveProperty('name');
-    expect(getUserApi.body).toHaveProperty('phone');
-    expect(getUserApi.body.accountId).toBe(17989091); //todo придумать как получать accountId динамически для теста
-    expect(getUserApi.body.id).toBe(userApi.id);
-    expect(getUserApi.body.name).toBe(userApi.name);
-    expect(getUserApi.body.phone).toBe(userApi.phone || null);
-
-});
-
-test('04 - создание пользователей с одинаковым phone', { tag: '@post' }, async ({ request, page }) => {
-const api = new Api(request);
+test('03 - создание пользователей с одинаковым phone', { tag: '@api' }, async ({ api }) => {
 //создаем первого пользователя с уникальным phone
 const userApi1 = new userApiBuilder()
     .withId()
     .withName()
     .withPhone('79111111111')
     .build();
-console.log(userApi1);
 const createdUser1 = await api.postUser.post(undefined, [userApi1]);
 await new Promise(resolve => setTimeout(resolve, 100));
 //создаем второго пользователя с таким же phone
@@ -78,7 +57,6 @@ const userApi2 = new userApiBuilder()
     .withPhone('79111111111')
     .build();
 const createdUser2 = await api.postUser.post(undefined, [userApi2]);
-console.log(createdUser2);
 //проверяем, что статус ответа 400, тело ответа содержит ошибку о дублировании phone
 expect(createdUser2.status).toBe(400);
 const responseBody = JSON.parse(createdUser2.body);
@@ -87,8 +65,7 @@ expect(responseBody.description).toBe('User with phone number 79111111111 alread
 expect(responseBody.data).toEqual({ phone: "79111111111" });
     });
 
-test('05 - удаление пользователя api', { tag: '@delete' }, async ({ request, page }) => {
-    const api = new Api(request);
+test('04 - удаление пользователя api', { tag: '@api' }, async ({ api }) => {
     //создаем пользователя
     const userApi = new userApiBuilder()
         .withId()
@@ -108,21 +85,17 @@ test('05 - удаление пользователя api', { tag: '@delete' }, a
 
 });
 
-/*test('06 - удаление всех пользователя api', { tag: '@delete' }, async ({ request, page }) => {
-    const api = new Api(request);
+test('05 - удаление всех пользователя api', { tag: '@api' }, async ({ api }) => {
     //получаем всех существующих пользователей
     const getAllUsers = await api.getAllUsers.get(undefined);
-    console.log(getAllUsers);
     //сохраняем id всех пользователей в массив
     const userIds = getAllUsers.body.map(user => user.id);
-    console.log('ID для удаления:', userIds);
-    
     //удаляем пользователей
     const deletedUser = await api.deleteAllUsers.patch(undefined, userIds);
     //проверяем, что статус ответа 200
     expect(deletedUser.status).toBe(200);
 
 
-});*/
+})
 
 

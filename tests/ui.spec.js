@@ -8,14 +8,14 @@ const user = new UserBuilder().withEmail().withPassword().build();
 const template = new TemplateBuilder().withTitle().withText().build();
 const tag = new TagBuilder().withName().build();
 
-test('Авторизация с валидными данными', async ({ app }) => {
+test('01 - Авторизация с валидными данными', { tag: '@ui' }, async ({ app }) => {
     await app.login.open();
     await app.login.login(user);
     await app.account.openSettings();
     await expect(app.account.getEmail()).toContainText('bibbyunexpected@wshu.net');
 });
 
-test('Добавление шаблона сообщения', async ({ app }) => {
+test('02 - Добавление шаблона сообщения', { tag: '@ui' }, async ({ app }) => {
     await app.login.open();
     await app.login.login(user);
     await app.account.openTemplates();
@@ -24,7 +24,7 @@ test('Добавление шаблона сообщения', async ({ app }) =
     await expect(app.template.getSnackbar()).toContainText('У вас новый шаблон');
 });
 
-test('Добавление тега', async ({ app }) => {
+test('03 - Добавление тега', { tag: '@ui' }, async ({ app }) => {
     await app.login.open();
     await app.login.login(user);
     await app.account.openTemplates();
@@ -33,7 +33,7 @@ test('Добавление тега', async ({ app }) => {
     await expect(app.template.tagInput).toHaveValue(tag.name);
 });
 
-test('Добавление tg bot', async ({ app }) => {
+test('04 - Добавление tg bot', { tag: '@ui' }, async ({ app }) => {
     await app.login.open();
     await app.login.login(user);
     await app.channel.addChannel(process.env.TEST_CHANNEL_TOKEN);
@@ -43,7 +43,7 @@ test('Добавление tg bot', async ({ app }) => {
     await expect(app.channel.getSnackbar()).toContainText('Вы добавили канал. На нем автоматически включился автоответ: «Первое входящее»');
 });
 
-test('Удаление канала', async ({ app }) => {
+test('05 - Удаление канала', { tag: '@ui' }, async ({ app }) => {
     await app.login.open();
     await app.login.login(user);
     await app.channel.addChannel(process.env.TEST_CHANNEL_TOKEN_2);

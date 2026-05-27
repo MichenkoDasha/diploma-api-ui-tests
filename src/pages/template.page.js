@@ -1,4 +1,3 @@
-import { faker } from '@faker-js/faker'; 
 export class TemplatePage {
     constructor(page) {
         this.page = page;
