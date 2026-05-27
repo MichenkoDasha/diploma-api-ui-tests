@@ -30,7 +30,7 @@ export class GetAllUsersService {
     async get(token = process.env.API_TOKEN, userId) {
 
         return test.step('GET /users', async () => {
-            const response = await this.request.get(`${API_BASE_URL}/users`, {
+            const response = await this.request.get(`${process.env.API_BASE_URL}/users`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Accept': 'application/json',
@@ -74,7 +74,7 @@ export class DeleteUserService {
     async delete(token = process.env.API_TOKEN, userId) {
 
         return test.step('DELETE /users', async () => {
-            const response = await this.request.delete(`${API_BASE_URL}/users/${userId}`, {
+            const response = await this.request.delete(`${process.env.API_BASE_URL}/users/${userId}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Accept': 'application/json',

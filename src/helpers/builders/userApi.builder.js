@@ -3,8 +3,8 @@ import {faker} from '@faker-js/faker';
 export class userApiBuilder {
     withId(id){
         this.id = (id !== undefined && id !== null) 
-            ? id 
-            : faker.datatype.uuid();
+        ? id 
+        : Date.now().toString();
     return this;
     }
      withName(name) {
