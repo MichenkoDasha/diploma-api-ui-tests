@@ -1,8 +1,10 @@
 import {faker} from '@faker-js/faker';
 
 export class TagBuilder {
-    withName(){
-        this.name = faker.word.noun();
+    withName(name) {
+        this.name = (name !== undefined && name !== null)
+            ? name
+            : faker.lorem.word(); 
         return this;
 }
   

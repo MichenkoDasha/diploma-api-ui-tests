@@ -1,0 +1,5 @@
+{ id: 966, name: 'Junior' }
+{
+  body: '{"status":400,"requestId":"f172cefe635a9b76e36d048118742515","error":"INVALID_USERS_DATA","description":"One or more of provided users identifiers are not valid.","data":[{"index":0,"fields":["id"]}]}',
+  status: 400
+}

@@ -12,6 +12,8 @@ test('01 - Создаем пользователя и проверяем его 
         .withName()
         .build();
     const createdUser = await api.postUser.post(undefined, [userApi]);
+    console.log(userApi);
+    console.log(createdUser);
     //проверяем, что статус ответа 200, тело ответа не содержит данных пользователя
     expect(createdUser.status).toBe(200);
     expect(createdUser).not.toBeNull();
