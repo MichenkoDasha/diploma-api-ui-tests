@@ -38,7 +38,6 @@ test('04 - Добавление tg bot', { tag: '@ui' }, async ({ app }) => {
     await app.login.login(user);
     await app.channel.addChannel(process.env.TEST_CHANNEL_TOKEN);
     await app.account.open();
-    await app.account.openChannels();
     await expect(app.channel.getActiveStatus()).toBeVisible();
     await expect(app.channel.getSnackbar()).toContainText('Вы добавили канал. На нем автоматически включился автоответ: «Первое входящее»');
 });
