@@ -1,4 +1,3 @@
-import { faker } from '@faker-js/faker';
 export class UserBuilder {
     withEmail(email = null){
         this.email = email ?? process.env.TEST_USER_EMAIL;
