@@ -19,7 +19,62 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci --prefer-offline
+        run: npm ci --prefer-offlinename: wazzup gof diploma
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  pw6tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install chromium --with-deps
+
+      # === Создаём .env из GitHub Secrets ===
+      - name: Create .env file from secrets
+        run: |
+          cat > .env << EOF
+          BASE_URL=${{ secrets.BASE_URL }}
+          API_BASE_URL=${{ secrets.API_BASE_URL }}
+          TEST_USER_EMAIL=${{ secrets.TEST_USER_EMAIL }}
+          TEST_USER_PASSWORD=${{ secrets.TEST_USER_PASSWORD }}
+          API_TOKEN=${{ secrets.API_TOKEN }}
+          TEST_CHANNEL_TOKEN=${{ secrets.TEST_CHANNEL_TOKEN }}
+          TEST_CHANNEL_TOKEN_2=${{ secrets.TEST_CHANNEL_TOKEN_2 }}
+          EOF
+
+      - name: Show .env (для отладки — можно потом удалить)
+        run: cat .env
+
+      - name: Run Playwright tests
+        run: npx dotenvx run --quiet -- npx playwright test --workers=3 --retries=0 --timeout=30000
+        env:
+          CI: true
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: |
+            test-results/
+            playwright-report/
+            allure-results/
 
       - name: Cache Playwright
         uses: actions/cache@v4
