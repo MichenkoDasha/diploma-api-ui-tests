@@ -13,13 +13,13 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'secret_for_diploma', variable: 'ENV_FILE')]) {
                     nodejs('NodeJS22.22.0') {
-                       sh '''
-                        cp ${ENV_FILE} .env
-                        npm ci
-                        npx playwright install chromium --with-deps
-                        npm add allure
-                        npm t || echo "Tests completed with failures"
-                    '''
+                        sh '''
+                            cp ${ENV_FILE} .env
+                            npm ci
+                            npx playwright install chromium --with-deps
+                            npm add allure
+                            npm t || echo "Tests completed with failures"
+                        '''
                     }
                 }
             }
@@ -56,20 +56,32 @@ pipeline {
         }
 
         stage('Telegram Notification') {
-    steps {
-        withCredentials([string(credentialsId: 'telegram-token_for_diploma', variable: 'TELEGRAM_TOKEN')]) {
-            nodejs('NodeJS22.22.0') {
-                sh '''
-                    export TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
-                    java -DconfigFile=notifications/telegram.json \
-                         -Dtelegram.token=${TELEGRAM_TOKEN} \
-                         -jar notifications/allure-notifications-4.11.0.jar || echo "Telegram notification failed"
-                '''
+            steps {
+                withCredentials([string(credentialsId: 'telegram-token_for_diploma', variable: 'TELEGRAM_TOKEN')]) {
+                    nodejs('NodeJS22.22.0') {
+                        sh '''
+                            curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage" \
+                                -d "chat_id=-5174723274" \
+                                -d "text=✅ Тесты завершены!%0A%0A📊 Результаты: https://michenkodasha.github.io/diploma-api-ui-tests/" \
+                                -d "parse_mode=Markdown" || echo "Telegram notification failed"
+                        '''
+                    }
+                }
             }
         }
     }
-}
-}
+
+    post {
+        always {
+            archiveArtifacts artifacts: "${ALLURE_RESULTS}/**/*,${ALLURE_REPORT}/**/*,playwright-report/**/*,test-results/**/*",
+                             allowEmptyArchive: true,
+                             fingerprint: true
+            echo '✅ Pipeline completed. Reports archived.'
+        }
+        failure {
+            echo '❌ Pipeline failed. Check console output.'
+        }
     }
+}
 
 
