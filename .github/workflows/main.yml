@@ -16,22 +16,27 @@ jobs:
       - name: Build Docker image
         run: docker build -t diploma-tests .
 
+      - name: Create .env file
+        run: |
+          echo "API_BASE_URL=${{ secrets.API_BASE_URL }}" > .env
+          echo "BASE_URL=${{ secrets.BASE_URL }}" >> .env
+          echo "API_TOKEN=${{ secrets.API_TOKEN }}" >> .env
+          echo "TEST_USER_EMAIL=${{ secrets.TEST_USER_EMAIL }}" >> .env
+          echo "TEST_USER_PASSWORD=${{ secrets.TEST_USER_PASSWORD }}" >> .env
+          echo "TEST_CHANNEL_TOKEN=${{ secrets.TEST_CHANNEL_TOKEN }}" >> .env
+          echo "TEST_CHANNEL_TOKEN_2=${{ secrets.TEST_CHANNEL_TOKEN_2 }}" >> .env
+
       - name: Run tests in Docker
         run: |
           docker run --rm \
-            -e API_BASE_URL=${{ secrets.API_BASE_URL }} \
-            -e BASE_URL=${{ secrets.BASE_URL }} \
-            -e API_TOKEN=${{ secrets.API_TOKEN }} \
-            -e TEST_USER_EMAIL=${{ secrets.TEST_USER_EMAIL }} \
-            -e TEST_USER_PASSWORD=${{ secrets.TEST_USER_PASSWORD }} \
-            -e TEST_CHANNEL_TOKEN=${{ secrets.TEST_CHANNEL_TOKEN }} \
-            -e TEST_CHANNEL_TOKEN_2=${{ secrets.TEST_CHANNEL_TOKEN_2 }} \
+            -v ${{ github.workspace }}/.env:/app/.env \
             -v ${{ github.workspace }}/allure-results:/app/allure-results \
             diploma-tests
 
       - name: Generate Allure report
         run: |
           docker run --rm \
+            -v ${{ github.workspace }}/.env:/app/.env \
             -v ${{ github.workspace }}/allure-results:/app/allure-results \
             --entrypoint npx \
             diploma-tests allure generate allure-results -o allure-report --clean
