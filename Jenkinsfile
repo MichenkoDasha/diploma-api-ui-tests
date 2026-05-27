@@ -58,26 +58,18 @@ pipeline {
         stage('Telegram Notification') {
     steps {
         withCredentials([string(credentialsId: 'telegram-token_for_diploma', variable: 'TELEGRAM_TOKEN')]) {
-            sh '''
-                TOTAL=$(jq '.statistic.total' allure-report/widgets/summary.json)
-                PASSED=$(jq '.statistic.passed' allure-report/widgets/summary.json)
-                FAILED=$(jq '.statistic.failed' allure-report/widgets/summary.json)
-                PERCENT=$(echo "scale=1; $PASSED * 100 / $TOTAL" | bc)
-                
-                MESSAGE="✅ *Результаты тестирования Wazzup* ✅%0A%0A\
-                📊 *Всего тестов:* $TOTAL%0A\
-                ✅ *Пройдено:* $PASSED ($PERCENT%)%0A\
-                ❌ *Упало:* $FAILED%0A%0A\
-                📎 [Открыть Allure Report](https://michenkodasha.github.io/diploma-api-ui-tests/)"
-                
-                curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage" \
-                     -d "chat_id=-5174723274" \
-                     -d "text=${MESSAGE}" \
-                     -d "parse_mode=Markdown"
-            '''
+            nodejs('NodeJS22.22.0') {
+                sh '''
+                    export TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
+                    java -DconfigFile=notifications/telegram.json \
+                         -Dtelegram.token=${TELEGRAM_TOKEN} \
+                         -jar notifications/allure-notifications-4.11.0.jar || echo "Telegram notification failed"
+                '''
+            }
         }
     }
 }
-    }
 }
+    }
+
 
