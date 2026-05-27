@@ -58,58 +58,26 @@ pipeline {
         stage('Telegram Notification') {
     steps {
         withCredentials([string(credentialsId: 'telegram-token_for_diploma', variable: 'TELEGRAM_TOKEN')]) {
-            nodejs('NodeJS22.22.0') {
-                sh '''
-                    node -e '
-                        const fs = require("fs");
-                        const https = require("https");
-                        
-                        const TOKEN = process.env.TELEGRAM_TOKEN;
-                        const CHAT_ID = "-5174723274";
-                        const REPORT_LINK = "https://michenkodasha.github.io/diploma-api-ui-tests/";
-                        
-                        let total = 0, passed = 0, failed = 0;
-                        try {
-                            const data = JSON.parse(fs.readFileSync("allure-report/widgets/summary.json", "utf8"));
-                            total = data.statistic.total || 0;
-                            passed = data.statistic.passed || 0;
-                            failed = data.statistic.failed || 0;
-                        } catch(e) {
-                            console.log("No summary.json");
-                            process.exit(1);
-                        }
-                        
-                        const percent = total > 0 ? (passed * 100 / total).toFixed(1) : 0;
-                        const message = "✅ *Результаты тестирования Wazzup* ✅\\n\\n" +
-                            "📊 *Всего тестов:* " + total + "\\n" +
-                            "✅ *Пройдено:* " + passed + " (" + percent + "%)\\n" +
-                            "❌ *Упало:* " + failed + "\\n\\n" +
-                            "📎 [Открыть Allure Report](" + REPORT_LINK + ")";
-                        
-                        const url = "https://api.telegram.org/bot" + TOKEN + "/sendMessage";
-                        const postData = "chat_id=" + CHAT_ID + "&text=" + encodeURIComponent(message) + "&parse_mode=Markdown";
-                        
-                        const req = https.request(url, {method: "POST"}, () => console.log("✅ Telegram sent"));
-                        req.on("error", () => console.log("❌ Telegram failed"));
-                        req.write(postData);
-                        req.end();
-                    '
-                '''
-            }
+            sh '''
+                TOTAL=$(jq '.statistic.total' allure-report/widgets/summary.json)
+                PASSED=$(jq '.statistic.passed' allure-report/widgets/summary.json)
+                FAILED=$(jq '.statistic.failed' allure-report/widgets/summary.json)
+                PERCENT=$(echo "scale=1; $PASSED * 100 / $TOTAL" | bc)
+                
+                MESSAGE="✅ *Результаты тестирования Wazzup* ✅%0A%0A\
+                📊 *Всего тестов:* $TOTAL%0A\
+                ✅ *Пройдено:* $PASSED ($PERCENT%)%0A\
+                ❌ *Упало:* $FAILED%0A%0A\
+                📎 [Открыть Allure Report](https://michenkodasha.github.io/diploma-api-ui-tests/)"
+                
+                curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage" \
+                     -d "chat_id=-5174723274" \
+                     -d "text=${MESSAGE}" \
+                     -d "parse_mode=Markdown"
+            '''
         }
     }
 }
     }
+}
 
-    post {
-        always {
-            archiveArtifacts artifacts: "${ALLURE_RESULTS}/**/*,${ALLURE_REPORT}/**/*,playwright-report/**/*,test-results/**/*",
-                             allowEmptyArchive: true,
-                             fingerprint: true
-            echo '✅ Pipeline completed. Reports archived.'
-        }
-        failure {
-            echo '❌ Pipeline failed. Check console output.'
-        }
-    }
-}
