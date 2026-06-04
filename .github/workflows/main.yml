@@ -37,9 +37,6 @@ jobs:
           TEST_CHANNEL_TOKEN_2=${{ secrets.TEST_CHANNEL_TOKEN_2 }}
           EOF
 
-      - name: Show .env (для отладки — можно потом удалить)
-        run: cat .env
-
       - name: Run Playwright tests
         run: npx playwright test --workers=2 --retries=0
         env:
