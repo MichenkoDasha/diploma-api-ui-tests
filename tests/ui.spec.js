@@ -4,18 +4,17 @@ dotenv.config();
 import { test, expect } from '../src/helpers/fixtures/fixture';
 import { UserBuilder, TemplateBuilder, TagBuilder } from '../src/helpers/builders/index';
 
-const user = new UserBuilder().withEmail().withPassword().build();
-const template = new TemplateBuilder().withTitle().withText().build();
-const tag = new TagBuilder().withName().build();
 
 test('01 - Авторизация с валидными данными', { tag: '@ui' }, async ({ app }) => {
     await app.login.open();
     await app.login.login(user);
     await app.account.openSettings();
-    await expect(app.account.getEmail()).toContainText('bibbyunexpected@wshu.net');
+    await expect(app.account.getEmail()).toContainText(user.email);
 });
 
 test('02 - Добавление шаблона сообщения', { tag: '@ui' }, async ({ app }) => {
+    const user = new UserBuilder().withEmail().withPassword().build();
+    const template = new TemplateBuilder().withTitle().withText().build();
     await app.login.open();
     await app.login.login(user);
     await app.account.openTemplates();
@@ -25,6 +24,8 @@ test('02 - Добавление шаблона сообщения', { tag: '@ui'
 });
 
 test('03 - Добавление тега', { tag: '@ui' }, async ({ app }) => {
+    const user = new UserBuilder().withEmail().withPassword().build();
+    const tag = new TagBuilder().withName().build();
     await app.login.open();
     await app.login.login(user);
     await app.account.openTemplates();
@@ -34,6 +35,7 @@ test('03 - Добавление тега', { tag: '@ui' }, async ({ app }) => {
 });
 
 test('04 - Добавление tg bot', { tag: '@ui' }, async ({ app }) => {
+    const user = new UserBuilder().withEmail().withPassword().build();
     await app.login.open();
     await app.login.login(user);
     await app.channel.addChannel(process.env.TEST_CHANNEL_TOKEN);
@@ -43,6 +45,7 @@ test('04 - Добавление tg bot', { tag: '@ui' }, async ({ app }) => {
 });
 
 test('05 - Удаление канала', { tag: '@ui' }, async ({ app }) => {
+    const user = new UserBuilder().withEmail().withPassword().build();
     await app.login.open();
     await app.login.login(user);
     await app.channel.addChannel(process.env.TEST_CHANNEL_TOKEN_2);

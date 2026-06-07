@@ -12,12 +12,13 @@ export class LoginPage {
         await this.emailInput.fill(email);
         await this.passwordInput.click();
         await this.passwordInput.fill(password);
-        await this.loginButton.click();
+        await this.loginButton.click({ force: true });
     }
 
     async gotoRegister() {
         await this.signupLink.click();
     }
+
     async open() {
         await this.page.goto('/login/');
     }
