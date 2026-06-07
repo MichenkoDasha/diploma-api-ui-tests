@@ -6,7 +6,7 @@ export class TemplatePage {
         this.addTemplateButton = page.getByRole('button', { name: 'ДОБАВИТЬ ШАБЛОН' });
         this.templateNameInput = page.getByRole('textbox', { name: 'Название шаблона для быстрого поиска в чатах' });
         this.templateTextInput = page.locator('.text-input');
-        this.saveButton = page.getByRole('button', { name: 'Добавить', exact: true});
+        this.saveButton = page.getByRole('button', { name: 'Добавить', exact: true });
         this.snackbar = page.locator('.v-snack__content');
         this.templateTitle = page.getByRole('main');
         this.templateText = page.getByRole('main');
@@ -16,11 +16,11 @@ export class TemplatePage {
         this.tagInput = page.getByRole('textbox', { name: 'Название тега' }).first();
         this.saveEditButton = page.getByRole('button', { name: 'Сохранить' })
         const tagInput = this.page.getByRole('textbox', { name: 'Название тега' }).first();
-    
+
 
     }
     async addTemplate(template) {
-    const { title, text } = template;
+        const { title, text } = template;
         await this.addTemplateButton.click();
         await this.templateNameInput.click();
         await this.templateNameInput.fill(title);
@@ -31,7 +31,7 @@ export class TemplatePage {
     }
 
     async addTag(tag) {
-        const {name} = tag; 
+        const { name } = tag;
         await this.tagButton.click();
         await this.tagInput.fill(name);
         await this.saveEditButton.click();
@@ -44,13 +44,12 @@ export class TemplatePage {
     getSnackbar() {
         return this.snackbar;
     }
-    getTemplateTitle() {
-        const { title, text } = template;
-        return this.templateTitle().filter({ hasText: title });
+    getTemplateTitle(title) {
+        return this.templateTitle.filter({ hasText: title });
     }
-    getTemplateText() {
-        const { title, text } = template;
-        return this.templateText().filter({ hasText: text });
+
+    getTemplateText(text) {
+        return this.templateText.filter({ hasText: text });
     }
 }
 
