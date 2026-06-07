@@ -12,7 +12,7 @@ export class ChannelPage {
         this.delButton = page.getByRole('button', { name: 'Удалить' });
         this.activeStatus = page.locator('div').filter({ hasText: /^Активен$/ }).first();
         this.snackbar = page.locator('.v-snackbar__content');
-        this.deleteSnacbar = page.getByRole('status');
+        this.deleteSnackbar = page.getByRole('status');
 
     }
    async addChannel(token) {
@@ -38,6 +38,6 @@ export class ChannelPage {
         return this.snackbar;
     }
     getDeleteSnackbar() {
-        return this.deleteSnacbar;
+        return this.deleteSnackbar;
     }
 }

@@ -6,6 +6,7 @@ import { UserBuilder, TemplateBuilder, TagBuilder } from '../src/helpers/builder
 
 
 test('01 - Авторизация с валидными данными', { tag: '@ui' }, async ({ app }) => {
+    const user = new UserBuilder().withEmail().withPassword().build();
     await app.login.open();
     await app.login.login(user);
     await app.account.openSettings();
@@ -19,7 +20,8 @@ test('02 - Добавление шаблона сообщения', { tag: '@ui'
     await app.login.login(user);
     await app.account.openTemplates();
     await app.template.addTemplate(template);
-    await expect(app.template.getTemplateTitle()).toBeVisible(template.title);
+    await expect(app.template.getTemplateTitle()).toContainText(template.title);
+    await expect(app.template.getTemplateText()).toContainText(template.text);
     await expect(app.template.getSnackbar()).toContainText('У вас новый шаблон');
 });
 

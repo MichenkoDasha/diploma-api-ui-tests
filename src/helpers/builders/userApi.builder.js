@@ -1,6 +1,6 @@
 import {faker} from '@faker-js/faker';
 
-export class userApiBuilder {
+export class UserApiBuilder {
     withId(id){
         this.id = (id !== undefined && id !== null) 
         ? id 

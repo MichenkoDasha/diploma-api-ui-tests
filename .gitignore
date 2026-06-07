@@ -5,3 +5,6 @@ codegen/
 node_modules/
 allure-results/
 allure-report/
+playwright-report/
+export/
+*.png

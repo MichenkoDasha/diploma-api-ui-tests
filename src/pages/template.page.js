@@ -9,6 +9,7 @@ export class TemplatePage {
         this.saveButton = page.getByRole('button', { name: 'Добавить', exact: true});
         this.snackbar = page.locator('.v-snack__content');
         this.templateTitle = page.getByRole('main');
+        this.templateText = page.getByRole('main');
         //для добавления тега
         this.tagButton = page.getByRole('button').nth(3);
         this.tag = page.getByRole('button', { name: 'Добавить тег' });
@@ -44,7 +45,12 @@ export class TemplatePage {
         return this.snackbar;
     }
     getTemplateTitle() {
-        return this.templateTitle;
+        const { title, text } = template;
+        return this.templateTitle().filter({ hasText: title });
+    }
+    getTemplateText() {
+        const { title, text } = template;
+        return this.templateText().filter({ hasText: text });
     }
 }
 
