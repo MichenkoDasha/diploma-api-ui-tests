@@ -1,2 +1,0 @@
-{ id: '56', name: 'Margaretta', phone: '79111111111' }
-{ body: 'OK', status: 200 }
