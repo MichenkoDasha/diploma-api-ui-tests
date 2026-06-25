@@ -2,12 +2,12 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import { test, expect } from '../src/helpers/fixtures/fixture';
-import { userApiBuilder } from '../src/helpers/builders/index';
+import { UserApiBuilder } from '../src/helpers/builders/index';
 import fs from 'fs';
 
 test('01 - Создаем пользователя и проверяем его данные', { tag: '@api' }, async ({ api }) => {
     //создаем пользователя
-    const userApi = new userApiBuilder()
+    const userApi = new UserApiBuilder()
         .withId()
         .withName()
         .build();
@@ -43,7 +43,7 @@ test('02 - Получить всех пользователей api', { tag: '@a
 
 test('03 - создание пользователей с одинаковым phone', { tag: '@api' }, async ({ api }) => {
 //создаем первого пользователя с уникальным phone
-const userApi1 = new userApiBuilder()
+const userApi1 = new UserApiBuilder()
     .withId()
     .withName()
     .withPhone('79111111111')
@@ -51,7 +51,7 @@ const userApi1 = new userApiBuilder()
 const createdUser1 = await api.postUser.post(undefined, [userApi1]);
 await new Promise(resolve => setTimeout(resolve, 100));
 //создаем второго пользователя с таким же phone
-const userApi2 = new userApiBuilder()
+const userApi2 = new UserApiBuilder()
     .withId()
     .withName()
     .withPhone('79111111111')
@@ -67,7 +67,7 @@ expect(responseBody.data).toEqual({ phone: "79111111111" });
 
 test('04 - удаление пользователя api', { tag: '@api' }, async ({ api }) => {
     //создаем пользователя
-    const userApi = new userApiBuilder()
+    const userApi = new UserApiBuilder()
         .withId()
         .withName()
         .build();
